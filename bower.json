@@ -1,0 +1,32 @@
+{
+  "name": "skella",
+  "version": "0.0.0",
+  "authors": [
+    "Trevor F. Smith <trevor@podipo.com>"
+  ],
+  "description": "A front end foundation",
+  "main": "static/index.html",
+  "keywords": [
+    "bootstrap",
+    "grunt",
+    "less",
+    "javascript",
+    "backbone",
+    "laconic",
+    "sketch"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.1"
+  },
+  "devDependencies": {
+  }
+}
