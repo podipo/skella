@@ -29,3 +29,10 @@ Grunt ties it all together.
 	grunt watch
 
 Don't edit anything in bower_components as they will be overwritten by Bower.  To update Bootstrap variables edit `/static/variables.less`  and to enable or disable Bootstrap components edit `/static/bootstrap.less`.
+
+
+# License
+
+This project is licensed under the [MIT open source license](http://opensource.org/licenses/MIT).
+
+See the included [LICENSE](https://github.com/podipo/skella/blob/master/LICENSE) for details.
