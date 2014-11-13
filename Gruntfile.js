@@ -6,7 +6,7 @@ module.exports = function (grunt) {
 	var lessFiles = [{
 						'expand': true,
 						'cwd': 'static',
-						'src': ['**/*.less', '!**/_*.less', '!lib/bootstrap/**', '!bootstrap.less', '!variables.less'],
+						'src': ['**/*.less', '!**/_*.less', '!lib/**', '!bootstrap.less', '!variables.less'],
 						'dest': 'static/compiled/',
 						'ext': '.css'
 					}];

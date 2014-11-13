@@ -1,0 +1,97 @@
+@import "../variables.less";
+@import "../../bower_components/bootstrap/less/mixins.less";
+
+.living-style-library-view {
+	position: relative;
+	height: 100%;
+	padding: 0;
+	.nav-col {
+		height: 100%;
+		background-color: @gray-lighter;
+		padding-top: 20px;
+		.make-sm-column(2);
+		.btn-group-vertical {
+			width: 100%;
+		}
+	}
+	.content-col {
+		position: relative;
+		text-align: center;
+		.make-sm-column(10);
+	}
+	.iframe-controls {
+		margin: 20px 0;
+		display: block;
+		text-align: center;
+	}
+	.iframe-wrapper {
+		padding: 0 5px;
+		cursor: pointer;
+		height: 100%;
+	}
+
+	@iframe-height: 40em; /* 85% */
+
+	.iframe-lid {
+		height: 60%;
+		width: 100%;		
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: none;
+	}
+
+	iframe {
+		display: block;
+		height: @iframe-height;
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+		overflow-y: auto;
+		overflow-x: auto;
+		border: 0;
+		padding: 0;
+		top: 75px;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-color: white;
+	}
+}
+
+.lsl-colors {
+	display: block;
+	margin-bottom: 20px;
+	> li {
+		display: inline-block;
+		vertical-align: top;
+		width: 140px;
+		padding: 5px;
+		border: solid 1px @gray-lighter;
+		text-align: center;
+	}
+	.lsl-swatch {
+		display: inline-block;
+		width: 90%;
+		height: 100px;
+	}
+}
+
+.frame-width-indicator {
+	width: 100%;
+	min-height: 20px;
+	border: solid 1px #EEE;
+	border-bottom: none;
+	text-align: center;
+
+	&.xxs { background-color: #999; }
+	&.xs { background-color: #AAA; }
+	&.sm { background-color: #BBB; }
+	&.md { background-color: #CCC; }
+	&.lg { background-color: #DDD; }
+}
+
+/*
+	Copyright 2014 Podipo LLC, All Rights Reserved
+	See https://github.com/podipo/skella/blob/master/LICENSE for licensing information.
+*/

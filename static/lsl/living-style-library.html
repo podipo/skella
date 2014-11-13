@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../compiled/site.css" />
+		<link rel="stylesheet" type="text/css" href="../compiled/lsl/living-style-library.css" />
+		<style>
+			html {
+				padding-top: 2px;
+			}
+			body {
+				overflow-y: auto;
+			}
+			#page-wrapper {
+				border: solid 1px #EEE;
+				border-top: none;
+			}
+			.frame-width-indicator {
+				position: fixed;
+				top: 0;
+				left: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="view-wrapper" id="introduction-view">
+			<h1>This is the introduction view</h1>
+		</div>
+
+		<div class="view-wrapper" id="type-hierarchy-view">
+			<h1>Type hierarchy</h1>
+			<h1>Heading Level 1</h1>
+			<h2>Heading Level 2</h2>
+			<h3>Heading Level 3</h3>
+			<h4>Heading Level 4</h4>
+			<h5>Heading Level 5</h5>
+
+			<h1 class="subheading">Subheading Level 1</h1>
+			<h2 class="subheading">Subheading Level 2</h2>
+			<h3 class="subheading">Subheading Level 3</h3>
+			<h4 class="subheading">Subheading Level 4</h4>
+			<h5 class="subheading">Subheading Level 5</h5>
+
+			<h1><a href="#">Heading 1 with link</a></h1>
+			<h2><a href="#">Heading 2 with link</a></h2>
+			<h3><a href="#">Heading 3 with link</a></h3>
+			<h4><a href="#">Heading 4 with link</a></h4>
+			<h5><a href="#">Heading 5 with link</a></h5>
+			<h6><a href="#">Heading 6 with link</a></h6>
+
+			<h2>Paragraph text</h2>
+			<p>Blog McSweeney's swag pug dreamcatcher, sartorial Odd Future High Life irony. Mlkshk seitan Banksy, Helvetica fanny pack normcore meh taxidermy you probably haven't heard of them slow-carb Intelligentsia typewriter artisan. Retro polaroid quinoa, cornhole synth deep v pickled before they sold out viral Thundercats.</p>
+			<p>Fingerstache butcher shabby chic, cold-pressed cliche hashtag street art sartorial tofu Intelligentsia farm-to-table ennui Pinterest High Life yr. Church-key craft beer farm-to-table photo booth seitan, slow-carb flexitarian irony keytar heirloom.</p>
+
+			<h2>Blockquote</h2>
+			<blockquote>
+				<p>Hella polaroid Vice, umami iPhone meditation wayfarers. Pop-up seitan locavore gentrify fashion axe tote bag, photo booth heirloom umami trust fund.</p>
+				<p>Tumblr roof party chia authentic banh mi. Blog Schlitz chia YOLO, single-origin coffee actually asymmetrical master cleanse 3 wolf moon tattooed. Taxidermy quinoa pickled 3 wolf moon pour-over chambray. Mlkshk iPhone flannel sustainable freegan beard.</p>
+			</blockquote>
+
+			<h2>Code block</h2>
+			<pre><code>
+				var str=""
+				var isFizz = 0;
+				var isBuzz = 0;
+				for(var i = 1; i <= 100; i++) {
+					isFizz = i % 3 === 0;
+					isBuzz = i % 5 === 0;
+					if(isFizz) {
+						str += "fizz"
+					}
+					if (isBuzz) {
+						str += "buzz"
+					}
+					if (!(isFizz||isBuzz)) {
+						str+=a;
+					}
+					str+="\n"
+				}
+				console.log(str);
+			</code></pre>
+
+	<pre>P R E F O R M A T T E D T E X T
+	! " # $ % &amp; ' ( ) * + , - . /
+	0 1 2 3 4 5 6 7 8 9 : ; &lt; = &gt; ?
+	@ A B C D E F G H I J K L M N O
+	P Q R S T U V W X Y Z [ \ ] ^ _
+	` a b c d e f g h i j k l m n o
+	p q r s t u v w x y z { | } ~
+	</pre>
+
+			<h3>HR</h3>
+			<hr>
+
+			<h3>Unordered list</h3>
+			<ul>
+				<li>This is a list item in an unordered list</li>
+				<li>An unordered list is a list in which the sequence of items is not important. Sometimes, an unordered list is a bulleted list. And this is a long list item in an unordered list that can wrap onto a new line. </li>
+				<li>
+					Lists can be nested inside of each other
+					<ul>
+						<li>This is a nested list item</li>
+						<li>This is another nested list item in an unordered list</li>
+					</ul>
+				</li>
+				<li>This is the last list item</li>
+			</ul>
+
+		</div>
+
+		<div class="view-wrapper" id="inline-elements-view">
+			<h2>Inline elements</h2>
+
+			<p><a href="#">This is a text link</a></p>
+
+			<p><strong>Strong is used to indicate strong importance</strong></p>
+
+			<p><em>This text has added emphasis</em></p>
+
+			<p>The <b>b element</b> is stylistically different text from normal text, without any special importance</p>
+
+			<p>The <i>i element</i> is text that is set off from the normal text</p>
+
+			<p>The <u>u element</u> is text with an unarticulated, though explicitly rendered, non-textual annotation</p>
+
+			<p><del>This text is deleted</del> and <ins>This text is inserted</ins></p>
+
+			<p><s>This text has a strikethrough</s></p>
+
+			<p>Superscript<sup>®</sup></p>
+
+			<p>Subscript for things like H<sub>2</sub>O</p>
+
+			<p><small>This small text is small for for fine print, etc.</small></p>
+
+			<p>Abbreviation: <abbr title="HyperText Markup Language">HTML</abbr></p>
+
+			<p>Keybord input: <kbd>Cmd</kbd></p>
+
+			<p><q cite="https://developer.mozilla.org/en-US/docs/HTML/Element/q">This text is a short inline quotation</q></p>
+
+			<p><cite>This is a citation</cite>
+
+			</p><p>The <dfn>dfn element</dfn> indicates a definition.</p>
+
+			<p>The <mark>mark element</mark> indicates a highlight</p>
+
+			<p><code>This is what inline code looks like.</code></p>
+
+			<p><samp>This is sample output from a computer program</samp></p>
+
+			<p>The <var>variable element</var>, such as <var>x</var> = <var>y</var></p>
+
+			<p><time datetime="2013-04-06T12:32+00:00">2 weeks ago</time></p>
+		</div>
+
+		<div class="view-wrapper" id="colors-view">
+			<h2>Colors</h2>
+			<ul class="lsl-colors">
+				<li>
+					<span class="lsl-swatch bg-lightest-blue"></span>
+					<span class="lsl-label">lightest-blue</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-light-blue"></span>
+					<span class="lsl-label">light-blue</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-dark-blue"></span>
+					<span class="lsl-label">dark-blue</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-red"></span>
+					<span class="lsl-label">red</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-orange"></span>
+					<span class="lsl-label">orange</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-green"></span>
+					<span class="lsl-label">green</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-aqua"></span>
+					<span class="lsl-label">aqua</span>
+				</li>
+			</ul>
+
+			<ul class="lsl-colors">
+				<li>
+					<span class="lsl-swatch bg-gray-darker"></span>
+					<span class="lsl-label">gray-darker</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-gray-dark"></span>
+					<span class="lsl-label">gray-dark</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-gray"></span>
+					<span class="lsl-label">gray</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-gray-light"></span>
+					<span class="lsl-label">gray-light</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-gray-lighter"></span>
+					<span class="lsl-label">gray-lighter</span>
+				</li>
+			</ul>
+
+			<ul class="lsl-colors">
+				<li>
+					<span class="lsl-swatch bg-primary"></span>
+					<span class="lsl-label">primary</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-success"></span>
+					<span class="lsl-label">success</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-info"></span>
+					<span class="lsl-label">info</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-warning"></span>
+					<span class="lsl-label">warning</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-danger"></span>
+					<span class="lsl-label">danger</span>
+				</li>
+			</ul>
+
+			<ul class="lsl-colors">
+				<li>
+					<span class="lsl-swatch bg-title-gray-light"></span>
+					<span class="lsl-label">title-gray-light</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-title-gray"></span>
+					<span class="lsl-label">title-gray</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-title-gray-bg"></span>
+					<span class="lsl-label">title-gray-bg</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-title-gray-dark-bg"></span>
+					<span class="lsl-label">title-gray-dark-bg</span>
+				</li>
+				<li>
+					<span class="lsl-swatch bg-title-tab"></span>
+					<span class="lsl-label">title-tab</span>
+				</li>
+			</ul>
+		</div>
+
+		<script src="../lib/jquery/jquery.js"></script>
+		<script src="../lib/underscore/underscore.js"></script>
+		<script src="../lib/laconic/laconic.js"></script>
+
+		<script src="../lib/bootstrap/bootstrap.js"></script>
+		<script src="../lib/backbone/backbone.js"></script>
+		<script src="../site.js"></script>
+		<script src="living-style-library.js"></script>
+
+		<script>
+			// Handle messages from the parent frame
+			window.addEventListener('message', function(message){
+				if(message.data.action == 'showAnchor'){
+					var top = $(message.data.fragment).offset().top;
+					document.body.scrollTop = top - 40;
+				} else {
+					console.log("Unknown message type", message);
+				}
+			})
+			$(document).ready(function(){
+				window.frameWidthIndicator = new lsl.views.FrameWidthIndicator({});
+				$('body').append(window.frameWidthIndicator.el);
+				window.frameWidthIndicator.handleWindowResize();
+			});
+		</script>
+	</body>
+	<!-- 
+		Copyright 2014 Podipo LLC, All Rights Reserved
+		See https://github.com/podipo/skella/blob/master/LICENSE for licensing information.
+	-->
+</html>
