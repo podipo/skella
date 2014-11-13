@@ -1,6 +1,6 @@
 # Skella: a front end foundation
 
-## Note: We are still setting this us, so it's interesting but not yet useful.
+## Note: We are still setting this up so it's interesting but not yet useful.
 
 NPM installs our front end development tools.
 
