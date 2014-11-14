@@ -25,7 +25,7 @@ module.exports = function (grunt) {
 				'files':lessFiles
 			}
 		},
-		bower: {
+		'bower': {
 			'options': {
 				'targetDir': './static/lib',
 				'layout': 'byComponent'
@@ -40,13 +40,23 @@ module.exports = function (grunt) {
 				'files': ['**/*.less'],
 				'tasks': ['less']
 			},
-		}
+		},
+		'nodestatic': {
+			'server': {
+				'options': {
+					'port': 8000,
+					'base': 'static'
+				}
+			}
+		}		
  	});
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-bower-task');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-nodestatic');
 	grunt.registerTask('default', ['bower:install', 'less']);
+	grunt.registerTask('dev', ['nodestatic', 'watch']);
 
 };
