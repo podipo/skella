@@ -271,7 +271,9 @@
 			window.addEventListener('message', function(message){
 				if(message.data.action == 'showAnchor'){
 					var top = $(message.data.fragment).offset().top;
-					document.body.scrollTop = top - 40;
+					// Yes, we set this twice to work across FF, Chrome, and Safari
+					$('body').scrollTop(top - 40);
+					document.documentElement.scrollTop = top - 40;
 				} else {
 					console.log("Unknown message type", message);
 				}
