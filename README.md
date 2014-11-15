@@ -1,12 +1,16 @@
 # Skella: a front end foundation
 
-## Note: We are still setting this up so it's interesting but not yet useful.
+This is a basic front-end only web project that uses the Node ecosystem to generate the static files that make up dynamic web sites.
 
-NPM installs our front end development tools like LESS and mustache templates.
+One of the main features of skella is the Living Style Library (still somewhat TBD) which contains examples of all styles and components in the system.
 
-Bower installs the front end libraries like Bootstrap and Backbone.
+# Technologies
 
-Grunt ties it all together.
+[NPM](https://www.npmjs.org/) installs our front end development tools like [LESS](http://lesscss.org/) and [mustache](https://github.com/janl/mustache.js).
+
+[Bower](http://bower.io/) installs the front end libraries like [Bootstrap](http://getbootstrap.com/) and [Backbone](http://backbonejs.org/).
+
+[Grunt](http://gruntjs.com/) ties it all together.
 
 # Installation
 
@@ -19,15 +23,24 @@ Grunt ties it all together.
 
 # Development
 
-	# Run Bower install, compile the mustache templates and LESS files, and copy static all into /dist
+There are three directories which you will use during development:
+
+- static: all of the files that are deployed unchanged like images or Javascript files
+- template: all of the source files like LESS and mustache templates
+- dist: the destination where the static and compiled files end up
+
+	
+TO run Bower install, compile the mustache templates and LESS files, and copy static all into /dist, run this:
+
 	grunt 
 
-	# Start an HTTPd on port 8000 and then automatically recompile mustache templates and LESS files if they change
+To start an HTTPd on port 8000 and then automatically recompile mustache templates and LESS files if they change, run this:
+
 	grunt dev
 
-Don't edit anything in /dist as it will be overwritten.  Instead, edit the files in /templates or /static.
+Note: Don't edit anything in /dist as it will be overwritten.  Instead, edit the files in /templates or /static.
 
-To update Bootstrap variables edit `/templates/variables.less`  and to enable or disable Bootstrap components edit `/templates/bootstrap.less`.
+To update Bootstrap variables edit /templates/variables.less and to enable or disable Bootstrap components edit /templates/bootstrap.less.
 
 
 # License
