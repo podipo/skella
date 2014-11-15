@@ -1,4 +1,3 @@
-/* This data structure is used as the data context for all mustache templates. */
 {
 	"site": {
 		"name":"Skella"
