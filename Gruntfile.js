@@ -1,6 +1,6 @@
 module.exports = function (grunt) {
 	// This will hold all files and directories to clean with the 'clean' task
-	var cleanFiles = ['static/compiled/', 'static/lib'];
+	var cleanFiles = ['static/compiled/', 'static/lib', 'static/**/*.html', 'static/**/*.mustache'];
 
 	// This will hold all of the sass file data structures
 	var lessFiles = [{
@@ -30,15 +30,13 @@ module.exports = function (grunt) {
 				'targetDir': './static/lib',
 				'layout': 'byComponent'
 			},
-			'install': {
-				//just run 'grunt bower:install' and you'll see files from your Bower packages in lib directory
-			}
+			'install': {}
 		},
 		'watch': {
 			'scripts': {
 				'options': { 'spawn': false, 'interrupt':false, 'atBegin':true },
-				'files': ['**/*.less'],
-				'tasks': ['less']
+				'files': ['**/*.less', 'templates/**/*.html', 'templates/**/*.mustache', 'templates/context.json'],
+				'tasks': ['less', 'mustache_render']
 			},
 		},
 		'nodestatic': {
@@ -48,15 +46,33 @@ module.exports = function (grunt) {
 					'base': 'static'
 				}
 			}
-		}		
- 	});
+		},
+
+		'mustache_render': {
+			'all': {
+				'options':{
+					'directory': 'templates/modules/'
+				},
+				'files': [{
+					'expand': true,
+					'cwd': 'templates/',
+					'src': '**/*.html',
+					'data': 'templates/context.json',
+					'dest': 'static/'
+				}]
+			}
+		}
+
+	});
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-bower-task');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-nodestatic');
-	grunt.registerTask('default', ['bower:install', 'less']);
+	grunt.loadNpmTasks('grunt-mustache-render');
+
+	grunt.registerTask('default', ['bower:install', 'less', 'mustache_render']);
 	grunt.registerTask('dev', ['nodestatic', 'watch']);
 
 };

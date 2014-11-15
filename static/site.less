@@ -2,6 +2,43 @@
 @import "bootstrap.less";
 @import "variables.less";
 
+@footer-height: 80px;
+
+html, body { height: 100%; }
+
+#body-container {
+	background-color: #FFF;
+	min-height:100%;
+	position:relative;
+}
+
+#page-wrapper {
+	background-color: #FFF;
+	padding-bottom: @footer-height;
+}
+
+#footer {
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	border-color: #0F0;
+	background-color: @navbar-default-bg;
+	color: @navbar-default-color;
+	a {
+		color: @navbar-default-color;
+	}
+	a:hover { text-decoration: none; }
+	height: @footer-height;
+	.container-fluid {
+		padding-top: @navbar-padding-vertical;
+		padding-bottom: @navbar-padding-vertical;
+	}
+}
+
+#footer-logo {
+	max-width: 60%;
+}
+
 /*
 	Copyright 2014 Podipo LLC, All Rights Reserved
 	See https://github.com/podipo/skella/blob/master/LICENSE for licensing information.
