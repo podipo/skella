@@ -14,8 +14,8 @@ One of the main features of skella is the Living Style Library (still somewhat T
 
 # Installation
 
-	npm install -g bower
-	npm install -g grunt-cli
+	sudo npm install -g bower
+	sudo npm install -g grunt-cli
 
 	# From the skella root dir
 	npm install
