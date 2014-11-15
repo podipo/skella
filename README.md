@@ -2,9 +2,9 @@
 
 ## Note: We are still setting this up so it's interesting but not yet useful.
 
-NPM installs our front end development tools.
+NPM installs our front end development tools like LESS and mustache templates.
 
-Bower installs the front end libraries like Bootstrap and jQuery.
+Bower installs the front end libraries like Bootstrap and Backbone.
 
 Grunt ties it all together.
 
@@ -16,15 +16,18 @@ Grunt ties it all together.
 	# From the skella root dir
 	npm install
 
+
 # Development
 
-	# Run Bower install and compile the LESS files
+	# Run Bower install, compile the mustache templates and LESS files, and copy static all into /dist
 	grunt 
 
-	# Start an HTTPd on port 8000 and then automatically recompile LESS files if they change
+	# Start an HTTPd on port 8000 and then automatically recompile mustache templates and LESS files if they change
 	grunt dev
 
-Don't edit anything in bower_components as they will be overwritten by Bower.  To update Bootstrap variables edit `/static/variables.less`  and to enable or disable Bootstrap components edit `/static/bootstrap.less`.
+Don't edit anything in /dist as it will be overwritten.  Instead, edit the files in /templates or /static.
+
+To update Bootstrap variables edit `/templates/variables.less`  and to enable or disable Bootstrap components edit `/templates/bootstrap.less`.
 
 
 # License
