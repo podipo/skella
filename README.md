@@ -1,14 +1,14 @@
 # Skella: a front end foundation
 
-This is a basic web project skeleton that uses the Node ecosystem of Javascript libraries to generate the static files that make up the front end of a dynamic web sites.  You should be able to serve the output of skella from any front end process like [nginx](http://nginx.org/) and to integrate skella with back end web stacks like [Django](https://www.djangoproject.com/), [Negroni](https://github.com/codegangsta/negroni), [Flask](http://flask.pocoo.org/), one of the Node engines.
+This is a basic web project skeleton that uses the Node ecosystem of Javascript libraries to generate the static files that make up the front end of dynamic web sites.  You can serve the output of skella from any front end process like [nginx](http://nginx.org/) and you can easily integrate skella with back end web stacks like [Django](https://www.djangoproject.com/), [Negroni](https://github.com/codegangsta/negroni), [Flask](http://flask.pocoo.org/), or one of the Node engines.
 
-One of the main features of skella is the Living Style Library (still somewhat TBD) which contains examples of all styles and components in the system.
+One of the main features of skella is the Living Style Library (still somewhat TBD) which contains examples of the styles and components in the system.
 
 # Technologies
 
-[NPM](https://www.npmjs.org/) installs our front end development tools like [LESS](http://lesscss.org/) and [mustache](https://github.com/janl/mustache.js).
+[NPM](https://www.npmjs.org/) installs the development tools like [LESS](http://lesscss.org/) and [mustache](https://github.com/janl/mustache.js).
 
-[Bower](http://bower.io/) installs the front end libraries like [Bootstrap](http://getbootstrap.com/) and [Backbone](http://backbonejs.org/).
+[Bower](http://bower.io/) installs the production libraries like [Bootstrap](http://getbootstrap.com/) and [Backbone](http://backbonejs.org/).
 
 [Grunt](http://gruntjs.com/) ties it all together.
 
@@ -25,12 +25,11 @@ One of the main features of skella is the Living Style Library (still somewhat T
 
 There are three directories which you will use during development:
 
-- static: all of the files that are deployed unchanged like images or Javascript files
-- template: all of the source files like LESS and mustache templates
-- dist: the destination where the static and compiled files end up
+- static: files like images and JS files that are deployed unchanged
+- template: source files like LESS and mustache templates
+- dist: the directory where the static and compiled files end up
 
-	
-To run Bower install, compile the mustache templates and LESS files, and copy static all into /dist, run this:
+To run Bower install, compile the mustache templates and LESS files, and copy static files into /dist, run this:
 
 	grunt 
 
@@ -40,7 +39,9 @@ To start an HTTPd on port 8000 and then automatically recompile mustache templat
 
 Note: Don't edit anything in /dist as it will be overwritten.  Instead, edit the files in /templates or /static.
 
-To update Bootstrap variables edit /templates/variables.less and to enable or disable Bootstrap components edit /templates/bootstrap.less.
+The context data for the mustache templates lives in /templates/context.json.
+
+To update Bootstrap variables, edit /templates/variables.less. To enable or disable Bootstrap components, edit /templates/bootstrap.less.
 
 
 # License
