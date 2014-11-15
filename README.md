@@ -6,13 +6,17 @@ One of the main features of skella is the Living Style Library (still somewhat T
 
 # Technologies
 
-[NPM](https://www.npmjs.org/) installs the development tools like [LESS](http://lesscss.org/) and [mustache](https://github.com/janl/mustache.js).
+[npm](https://www.npmjs.org/) installs the development tools like [LESS](http://lesscss.org/) and [mustache](https://github.com/janl/mustache.js).
 
 [Bower](http://bower.io/) installs the production libraries like [Bootstrap](http://getbootstrap.com/) and [Backbone](http://backbonejs.org/).
 
 [Grunt](http://gruntjs.com/) ties it all together.
 
 # Installation
+
+First, install [Node](http://nodejs.org/).
+
+Then use npm to fetch dependencies:
 
 	sudo npm install -g bower
 	sudo npm install -g grunt-cli
