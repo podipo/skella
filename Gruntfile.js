@@ -1,13 +1,13 @@
 module.exports = function (grunt) {
 	// This will hold all files and directories to clean with the 'clean' task
-	var cleanFiles = ['static/compiled/', 'static/lib', 'static/**/*.html', 'static/**/*.mustache'];
+	var cleanFiles = ['static/compiled-css/', 'static/lib', 'static/**/*.html', 'static/**/*.mustache'];
 
 	// This will hold all of the sass file data structures
 	var lessFiles = [{
 						'expand': true,
 						'cwd': 'static',
 						'src': ['**/*.less', '!**/_*.less', '!lib/**', '!bootstrap.less', '!variables.less'],
-						'dest': 'static/compiled/',
+						'dest': 'static/compiled-css/',
 						'ext': '.css'
 					}];
 

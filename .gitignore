@@ -1,5 +1,5 @@
 bower_components
 node_modules
-static/compiled
+static/compiled-css
 static/lib
-
+static/**/*.html
