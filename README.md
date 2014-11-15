@@ -1,6 +1,6 @@
 # Skella: a front end foundation
 
-This is a basic front-end only web project that uses the Node ecosystem to generate the static files that make up dynamic web sites.
+This is a basic web project skeleton that uses the Node ecosystem of Javascript libraries to generate the static files that make up the front end of a dynamic web sites.  You should be able to serve the output of skella from any front end process like [nginx](http://nginx.org/) and to integrate skella with back end web stacks like [Django](https://www.djangoproject.com/), [Negroni](https://github.com/codegangsta/negroni), [Flask](http://flask.pocoo.org/), one of the Node engines.
 
 One of the main features of skella is the Living Style Library (still somewhat TBD) which contains examples of all styles and components in the system.
 
@@ -30,7 +30,7 @@ There are three directories which you will use during development:
 - dist: the destination where the static and compiled files end up
 
 	
-TO run Bower install, compile the mustache templates and LESS files, and copy static all into /dist, run this:
+To run Bower install, compile the mustache templates and LESS files, and copy static all into /dist, run this:
 
 	grunt 
 
