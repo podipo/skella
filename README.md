@@ -1,8 +1,14 @@
 # Skella: a front end foundation
 
-This is a basic web project skeleton that uses the Node ecosystem of Javascript libraries to generate the static files that make up the front end of dynamic web sites.  You can serve the output of skella from any front end process like [nginx](http://nginx.org/) and you can easily integrate skella with back end web stacks like [Django](https://www.djangoproject.com/), [Negroni](https://github.com/codegangsta/negroni), [Flask](http://flask.pocoo.org/), or one of the Node engines.
+<div style="text-align: center;">
+	<img width="150" style="float: left; margin: 0 20px 2px 0;"  src="http://podipo.github.io/skella/images/Skella.png" /> 
+</div>
+
+[Skella](http://github.com/podipo/skella/) is a web project skeleton that uses the Node ecosystem of Javascript libraries to generate the static files that make up the front end of dynamic web sites.  You can serve the output of skella from any front end process like [nginx](http://nginx.org/) and you can easily integrate skella with back end web stacks like [Django](https://www.djangoproject.com/), [Negroni](https://github.com/codegangsta/negroni), [Flask](http://flask.pocoo.org/), or one of the Node engines.
 
 One of the main features of skella is the Living Style Library (still somewhat TBD) which contains examples of the styles and components in the system.
+
+<br style="clear: both;" >
 
 # Technologies
 
