@@ -37,7 +37,7 @@ To run Bower install, compile the mustache templates and LESS files, and copy st
 
 	grunt 
 
-To start an HTTPd on port 8000 and then automatically recompile mustache templates and LESS files if they change, run this:
+To start an HTTPd on [localhost:8000](http://localhost:8000/) and then automatically recompile mustache templates and LESS files if they change, run this:
 
 	grunt dev
 
