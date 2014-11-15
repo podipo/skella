@@ -1,19 +1,15 @@
 module.exports = function (grunt) {
-	// This will hold all files and directories to clean with the 'clean' task
-	var cleanFiles = ['static/compiled-css/', 'static/lib', 'static/**/*.html', 'static/**/*.mustache'];
-
-	// This will hold all of the sass file data structures
 	var lessFiles = [{
 						'expand': true,
-						'cwd': 'static',
-						'src': ['**/*.less', '!**/_*.less', '!lib/**', '!bootstrap.less', '!variables.less'],
-						'dest': 'static/compiled-css/',
+						'cwd': 'templates',
+						'src': ['**/*.less', '!**/_*.less', '!bootstrap.less', '!variables.less'],
+						'dest': 'dist/compiled-css/',
 						'ext': '.css'
 					}];
 
 	grunt.initConfig({
 		'clean': {
-			'src': cleanFiles
+			'src': ['dist']
 		},
 		'less': {
 			'development': {
@@ -27,7 +23,7 @@ module.exports = function (grunt) {
 		},
 		'bower': {
 			'options': {
-				'targetDir': './static/lib',
+				'targetDir': './dist/lib',
 				'layout': 'byComponent'
 			},
 			'install': {}
@@ -35,19 +31,21 @@ module.exports = function (grunt) {
 		'watch': {
 			'scripts': {
 				'options': { 'spawn': false, 'interrupt':false, 'atBegin':true },
-				'files': ['**/*.less', 'templates/**/*.html', 'templates/**/*.mustache', 'templates/context.json'],
-				'tasks': ['less', 'mustache_render']
+				'files': [
+					'templates/**/*', 
+					'static/**/*'
+				],
+				'tasks': ['less', 'mustache_render', 'copy']
 			},
 		},
 		'nodestatic': {
 			'server': {
 				'options': {
 					'port': 8000,
-					'base': 'static'
+					'base': 'dist'
 				}
 			}
 		},
-
 		'mustache_render': {
 			'all': {
 				'options':{
@@ -58,11 +56,22 @@ module.exports = function (grunt) {
 					'cwd': 'templates/',
 					'src': '**/*.html',
 					'data': 'templates/context.json',
-					'dest': 'static/'
+					'dest': 'dist/'
 				}]
 			}
+		},
+		'copy': {
+			'main': {
+				'files': [
+					{
+						'expand': true,
+						'cwd': 'static/', 
+						'src': ['**'], 
+						'dest': 'dist/'
+					}
+				]
+			}
 		}
-
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
@@ -71,8 +80,9 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-nodestatic');
 	grunt.loadNpmTasks('grunt-mustache-render');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 
-	grunt.registerTask('default', ['bower:install', 'less', 'mustache_render']);
+	grunt.registerTask('default', ['bower:install', 'less', 'mustache_render', 'copy']);
 	grunt.registerTask('dev', ['nodestatic', 'watch']);
 
 };
