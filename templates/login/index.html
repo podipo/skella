@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Login | {{site.name}}</title>
+		{{> site-styles}}
+		<style>
+			#login-col h1 { text-align: center; }
+		</style>
+	</head>
+	<body>
+		<div id="body-container">
+			{{> top-nav}}		
+			<div id="page-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div id="login-col" class="col-xs-12 col-sm-offset-3 col-sm-6">
+							<h1>Login</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			{{> footer}}
+			{{> site-scripts}}
+			<script>
+				$(document).ready(function(){
+					window.loginView = new skella.views.LoginView({});
+					window.loginView.$el.addClass('page-login-view');
+					$('#login-col').append(window.loginView.el);
+				});
+			</script>
+		</div>
+	</body>
+	{{> copyright}}
+</html>
