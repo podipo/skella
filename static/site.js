@@ -1,5 +1,5 @@
 /* This is where the site-wide special sauce lives. */
-
+console.log("Site js")
 var skella = {};
 skella.views = {};
 

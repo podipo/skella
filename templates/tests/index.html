@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Tests | {{site.name}}</title>
+		{{> site-styles}}
+		<link rel="stylesheet" href="/lib/qunit/qunit.css">
+		<style>
+		</style>
+	</head>
+	<body>
+		<div id="body-container">
+			{{> top-nav}}		
+			<div id="page-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							<div id="qunit"></div>
+							<div id="qunit-fixture"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{{> footer}}
+			{{> site-scripts}}
+			<script src="/lib/qunit/qunit.js"></script>
+			<script src="/tests/tests.js"></script>
+			<script>
+			</script>
+		</div>
+	</body>
+	{{> copyright}}
+</html>
