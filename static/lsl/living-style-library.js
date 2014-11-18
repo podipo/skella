@@ -42,6 +42,7 @@ lsl.views.LivingStyleLibraryView = Backbone.View.extend({
 		$(this.iFrameWrapper).mousedown(this.handleMouseDown);
 		$(this.iFrameWrapper).mouseup(this.handleMouseUp);
 		$(this.iFrameLid).mouseup(this.handleMouseUp);
+		$(this.iFrameLid).mouseleave(this.handleMouseUp);
 		$(this.iFrameLid).mousemove(this.handleMouseMove);
 
 		this.styleIFrame = $.el.iframe({
@@ -52,20 +53,30 @@ lsl.views.LivingStyleLibraryView = Backbone.View.extend({
 		this.iFrameWrapper.appendChild(this.styleIFrame);
 	},
 	handleMouseDown: function(event){
+		event.preventDefault();
 		this.mouseIsDown = true;
 		this.origClientX = event.clientX;
+		this.leftDrag = this.origClientX < ($(this.iFrameWrapper).width() / 2);
 		this.origViewportWidth = $(this.styleIFrame).width();
 		$(this.iFrameLid).show();
 	},
 	handleMouseUp: function(event){
+		event.preventDefault();
 		this.mouseIsDown = false;
 		this.origClientX = null;
+		this.leftDrag = null;
 		this.origViewportWidth = null;
 		$(this.iFrameLid).hide();
 	},
 	handleMouseMove: function(event){
 		if(!this.mouseIsDown) return;
-		var newViewportWidth = Math.max(lsl.sizes[0].min, this.origViewportWidth + -2*(event.clientX - this.origClientX));
+		event.preventDefault();
+		if(this.leftDrag){
+			var sign = -2;
+		} else {
+			var sign = 2;
+		}
+		var newViewportWidth = Math.max(lsl.sizes[0].min, this.origViewportWidth + sign * (event.clientX - this.origClientX));
 		this.setDisplayWidth(newViewportWidth, false, false);
 	},
 	createIframeControls: function(){
