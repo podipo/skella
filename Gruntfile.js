@@ -12,13 +12,21 @@ module.exports = function (grunt) {
 			'src': ['dist']
 		},
 		'less': {
-			'development': {
+			'options': {
+				'compress': true,
+				'yuicompress': true,
+				'optimization': 2,
+				'sourceMap': true,
+				'outputSourceFiles':true,
+			},
+			'site': {
 				'options': {
-					'compress': true,
-					'yuicompress': true,
-					'optimization': 2
+					'sourceMapFilename': 'dist/compiled.css.map',
+					'sourceMapURL': '/compiled.css.map'
 				},
-				'files':lessFiles
+				'files':{
+					'dist/compiled.css': 'templates/site.less'
+				}
 			}
 		},
 		'bower': {
