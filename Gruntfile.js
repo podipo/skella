@@ -43,7 +43,7 @@ module.exports = function (grunt) {
 					'templates/**/*', 
 					'static/**/*'
 				],
-				'tasks': ['less', 'mustache_render', 'copy', 'concat']
+				'tasks': ['less', 'mustache_render', 'copy', 'uglify']
 			},
 		},
 		'nodestatic': {
@@ -88,20 +88,22 @@ module.exports = function (grunt) {
 				]
 			}
 		},
-		'concat': {
+		'uglify': {
 			'options': {
-				'separator': ';',
+				'mangle': false,
+				'sourceMap': true
 			},
-			'dist': {
-				'src': [
-					'dist/lib/jquery/jquery.js', 
-					'dist/lib/underscore/underscore.js', 
-					'dist/lib/laconic/laconic.js', 
-					'dist/lib/bootstrap/bootstrap.js', 
-					'dist/lib/backbone/backbone.js', 
-					'dist/site.js'
-				],
-				'dest': 'dist/built.js',
+			'all': {
+				'files': {
+					'dist/built.js': [
+						'dist/lib/jquery/jquery.js', 
+						'dist/lib/underscore/underscore.js', 
+						'dist/lib/laconic/laconic.js', 
+						'dist/lib/bootstrap/bootstrap.js', 
+						'dist/lib/backbone/backbone.js', 
+						'dist/site.js'
+					]
+				}
 			}
 		},
 		'qunit': {
@@ -119,13 +121,13 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-qunit');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-bower-task');
 	grunt.loadNpmTasks('grunt-nodestatic');
 	grunt.loadNpmTasks('grunt-mustache-render');
 
-	grunt.registerTask('default', ['bower:install', 'less', 'mustache_render', 'copy', 'concat']);
+	grunt.registerTask('default', ['bower:install', 'less', 'mustache_render', 'copy', 'uglify']);
 	grunt.registerTask('dev', ['nodestatic:dev-server', 'watch']);
 	grunt.registerTask('test', ['nodestatic:test-server', 'qunit:all']);
 

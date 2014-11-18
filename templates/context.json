@@ -1,5 +1,9 @@
 {
 	"site": {
 		"name":"Skella"
+	},
+	"organization": {
+		"name": "Love Incorporated",
+		"url": "http://example.com/"
 	}
 }
