@@ -53,6 +53,17 @@ The context data for the mustache templates lives in /templates/context.json.
 
 To update Bootstrap variables, edit /templates/variables.less. To enable or disable Bootstrap components, edit /templates/bootstrap.less.
 
+# Testing
+
+Skella uses QUnit for testing.
+
+If you're running `grunt dev` then you can point your browser at [localhost:8000/tests/](http://localhost:8000/tests/). 
+
+If you want to run the tests in [phantomjs](http://phantomjs.org/) then run this:
+
+	grunt test
+
+To add tests, edit the files in /templates/tests/ and /static/tests/.
 
 # License
 
