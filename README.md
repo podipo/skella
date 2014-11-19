@@ -41,7 +41,13 @@ There are three directories which you will use during development:
 - template: source files like LESS and mustache templates
 - dist: the directory where the static and compiled files end up
 
-To run Bower install, compile the mustache templates and LESS files, and copy static files into /dist, run this:
+Note: Don't edit anything in /dist as it will be overwritten.  Instead, edit the files in /templates or /static.
+
+The context data for the mustache templates lives in /templates/context.json.
+
+To update Bootstrap variables, edit /templates/variables.less. To enable or disable Bootstrap components, edit /templates/bootstrap.less.
+
+To run the Bower install, compile the mustache templates and LESS files, copy static files into /dist, and then concatenate and make sourcemaps run this:
 
 	grunt 
 
@@ -49,11 +55,11 @@ To start an HTTPd on [localhost:8000](http://localhost:8000/) and then automatic
 
 	grunt dev
 
-Note: Don't edit anything in /dist as it will be overwritten.  Instead, edit the files in /templates or /static.
+The [HTTPd we use](http://www.browsersync.io/) is a little smart and it will notice if new CSS shows up in /dist/compiled.css and then automatically inject it into your browser.  So, don't be surprised when you don't need to hit reload to see CSS tweaks.
 
-The context data for the mustache templates lives in /templates/context.json.
+If you're just changing LESS files and you don't want to wait for the rest of the compilation tools then run this:
 
-To update Bootstrap variables, edit /templates/variables.less. To enable or disable Bootstrap components, edit /templates/bootstrap.less.
+	grunt dev-less
 
 # Testing
 
@@ -65,7 +71,7 @@ If you want to run the tests in [phantomjs](http://phantomjs.org/) then run this
 
 	grunt test
 
-To add tests, edit the files in /templates/tests/ and /static/tests/.
+To add tests, edit /static/tests/tests.js.
 
 # License
 

@@ -37,14 +37,38 @@ module.exports = function (grunt) {
 			'install': {}
 		},
 		'watch': {
-			'scripts': {
-				'options': { 'spawn': false, 'interrupt':false, 'atBegin':true },
+			'options': { 'spawn': false, 'interrupt':false, 'atBegin':true },
+			'all': {
 				'files': [
 					'templates/**/*', 
 					'static/**/*'
 				],
 				'tasks': ['less', 'mustache_render', 'copy', 'uglify']
 			},
+			'less': {
+				'files': [
+					'templates/**/*.less'
+				],
+				'tasks': ['less']
+			}
+		},
+		'browserSync': {
+			'dev': {
+				'bsFiles': {
+					'src' : 'dist/compiled.css'
+				},
+				'options': {
+					'watchTask': true,
+					'open': false,
+					'online': false,
+					'notify': false,
+					'port': 8000,
+					'server': {
+						'baseDir': 'dist',
+						'index': 'index.html'
+					}
+				}
+			}
 		},
 		'nodestatic': {
 			'options': {
@@ -110,7 +134,7 @@ module.exports = function (grunt) {
 			'all': {
 				'options': {
 					'urls': [
-						'http://localhost:8000/tests/'
+						'http://localhost:9000/tests/'
 					]
 				}
 			}
@@ -123,12 +147,14 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-qunit');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-browser-sync');
 	grunt.loadNpmTasks('grunt-bower-task');
 	grunt.loadNpmTasks('grunt-nodestatic');
 	grunt.loadNpmTasks('grunt-mustache-render');
 
 	grunt.registerTask('default', ['bower:install', 'less', 'mustache_render', 'copy', 'uglify']);
-	grunt.registerTask('dev', ['nodestatic:dev-server', 'watch']);
+	grunt.registerTask('dev', ['browserSync:dev', 'watch:all']);
+	grunt.registerTask('dev-less', ['browserSync:dev', 'watch:less']);
 	grunt.registerTask('test', ['nodestatic:test-server', 'qunit:all']);
 
 };
