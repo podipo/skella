@@ -80,22 +80,25 @@ lsl.views.LivingStyleLibraryView = Backbone.View.extend({
 		this.setDisplayWidth(newViewportWidth, false, false);
 	},
 	createIframeControls: function(){
-		var group = new $.el.div({'class':'btn-group'});
-
-		var createButton = function(title, width){
+		var controlDiv = new $.el.div({'class':'resize-button-groups'});
+		var createButton = function(title, width, fuzz){
 			var button = $.el.button({
 				'type':'button',
 				'class':'btn btn-default'
 			}, title);
 			$(button).click(function(event){
-				this.view.setDisplayWidth(this.width, true, true);
+				this.view.setDisplayWidth(this.width, fuzz, true);
 			}.bind({'view':this, 'width':width}));
 			return button;
 		}.bind(this);
 		for(var i=0; i < lsl.sizes.length; i++){
-			group.appendChild(createButton(lsl.sizes[i].name, lsl.sizes[i].min));
+			var group = new $.el.div({'class':'btn-group'});
+			group.appendChild(createButton(lsl.sizes[i].name + '-min', lsl.sizes[i].min, false));
+			group.appendChild(createButton(lsl.sizes[i].name, lsl.sizes[i].min, true));
+			group.appendChild(createButton(lsl.sizes[i].name + '-max', lsl.sizes[i].max, false));
+			controlDiv.appendChild(group);
 		}
-		return group;
+		return controlDiv;
 	},
 	createSectionButtonGroup: function(){
 		var group = new $.el.div({'class':'btn-group-vertical'});
