@@ -4,6 +4,18 @@
 		<meta charset="utf-8">
 		<title>Living Style Library | {{site.name}}</title>
 		{{> site-styles}}
+		<style>
+			html {
+				height: 100%;
+			}
+
+			body{
+				height: 100%;
+			}
+			footer{
+				display: none;
+			}
+		</style>
 	</head>
 	<body>
 		{{> top-nav}}
@@ -20,6 +32,11 @@
 				$('.lsl-nav').addClass('active');
 				window.livingStyleLibraryView = new lsl.views.LivingStyleLibraryView({});
 				$('#page-view').append(window.livingStyleLibraryView.el);
+
+				$('.iframe-wrapper').height( $('.content-col').height() - ( $('.iframe-controls').height() + 20) );
+			});
+			$( window ).resize(function() {
+				$('.iframe-wrapper').height( $('.content-col').height() - ( $('.iframe-controls').height() + 20) );
 			});
 		</script>
 	</body>
