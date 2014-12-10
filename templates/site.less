@@ -1,4 +1,3 @@
-
 @import "bootstrap.less";
 @import "variables.less";
 @import "lsl/living-style-library.less";
@@ -27,7 +26,6 @@ body{
 }
 
 #page-wrapper {
-	background-color: #FFF;
 	padding-top: 20px;
 	padding-bottom: @footer-height;
 }
@@ -67,6 +65,11 @@ body{
 
 
 .page-login-view {
+	.error {
+		padding: 15px;
+		text-align: center;
+		color: @brand-warning;
+	}
 	.input-form-group {
 		label {
 			.make-sm-column(2);

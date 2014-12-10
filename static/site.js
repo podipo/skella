@@ -1,5 +1,5 @@
 /* This is where the site-wide special sauce lives. */
-var skella = {};
+var skella = skella || {};
 skella.views = {};
 
 /*
@@ -75,12 +75,15 @@ skella.views.LoginView = Backbone.View.extend({
 	className: 'login-view form-horizontal',
 	tagName: 'form',
 	initialize: function(options){
+		_.bindAll(this, 'handleSubmit', 'handleLoginSuccess', 'handleLoginFailure', 'hideError', 'showError');
 		this.options = options;
-		this.$el.attr({'role':'form'});
-		this.usernameFormGroup = $.a(this.el, skella.views.generateInputFormGroup(
+		this.$el.attr({
+			'role':'form',
+		});
+		this.emailFormGroup = $.a(this.el, skella.views.generateInputFormGroup(
 			'text', 
-			'username', 'username', 
-			'Username', 'username'
+			'email', 'email', 
+			'Email', 'email'
 		));
 
 		this.passwordFormGroup = $.a(this.el, skella.views.generateInputFormGroup(
@@ -89,15 +92,36 @@ skella.views.LoginView = Backbone.View.extend({
 			'Password', 'password'
 		));
 
-		this.checkboxGroup = $.a(this.el, skella.views.generateCheckbox(
-			'remember-me', 'remember-me', 'Remember me'
-		));
-
 		this.submitButton = $.el.button({
 			'type':'submit',
 			'class':'btn btn-primary'
 		}, this.options.submitText || 'Submit');
 		this.submitGroup = $.a(this.el, $.el.div({'class':'form-group submit-form-group'}, $.el.div({'class':'submit-wrapper'}, this.submitButton)));
+
+		this.$el.submit(this.handleSubmit);
+	},
+	hideError: function(){
+		this.$el.find('.error').remove();
+	},
+	showError: function(message){
+		this.hideError();
+		this.$el.prepend($.el.p({'class':'error'}, message));
+	},
+	handleSubmit: function(event){
+		event.preventDefault();
+		var email = $(this.emailFormGroup).find('input').val();
+		var password = $(this.passwordFormGroup).find('input').val();
+		if(email == "" || password == "") {
+			this.showError('Please enter an email and password.');
+			return;
+		}
+		skella.api.login(email, password, this.handleLoginSuccess, this.handleLoginFailure); 
+	},
+	handleLoginSuccess: function(){
+		document.location.href = "/";
+	},
+	handleLoginFailure: function(){
+		this.showError('Email or password do not match.');
 	}
 });
 

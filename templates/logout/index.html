@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Logout | {{site.name}}</title>
+		{{> site-styles}}
+		<style>
+		</style>
+	</head>
+	<body>
+		<div id="body-container">
+			{{> site-scripts}}
+			<script>
+				$(document).ready(function(){
+					skella.api.logout(handleLogoutSuccess, handleLogoutFailure);
+				});
+				function handleLogoutSuccess(){
+					document.location.href = "/login/";
+				}
+				function handleLogoutFailure(){
+					$('#page-wrapper h1').text("Whoops, I could not log out.");
+				}
+			</script>
+		</div>
+	</body>
+	{{> copyright}}
+</html>
