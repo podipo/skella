@@ -43,7 +43,7 @@ module.exports = function (grunt) {
 					'templates/**/*', 
 					'static/**/*'
 				],
-				'tasks': ['less', 'mustache_render', 'copy', 'uglify']
+				'tasks': ['less', 'mustache_render', 'copy']
 			},
 			'less': {
 				'files': [
@@ -152,7 +152,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-nodestatic');
 	grunt.loadNpmTasks('grunt-mustache-render');
 
-	grunt.registerTask('default', ['bower:install', 'less', 'mustache_render', 'copy', 'uglify']);
+	grunt.registerTask('default', ['bower:install', 'less', 'mustache_render', 'copy']);
 	grunt.registerTask('dev', ['browserSync:dev', 'watch:all']);
 	grunt.registerTask('dev-less', ['browserSync:dev', 'watch:less']);
 	grunt.registerTask('test', ['nodestatic:test-server', 'qunit:all']);
