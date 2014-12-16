@@ -19,11 +19,11 @@
 @brand-warning:         @gray-dark;
 @brand-danger:          @gray-darker;
 
-@title-gray-light: #C9C7C7;
-@title-gray: #9B9999;
-@title-gray-bg: #2A2A33;
-@title-gray-dark-bg: #1E202B;
-@title-tab: #444444;
+@title-gray-light: @gray-light;
+@title-gray: @gray;
+@title-gray-bg: @gray;
+@title-gray-dark-bg: @gray-dark;
+@title-tab: @gray-lighter;
 
 //== Scaffolding
 //
@@ -35,7 +35,7 @@
 @text-color:            @gray-dark;
 
 //** Global textual link color.
-@link-color:            #009efb;
+@link-color:            @brand-primary;
 //** Link hover color set via `darken()` function.
 @link-hover-color:      darken(@link-color, 15%);
 
@@ -46,7 +46,7 @@
 
 // Aktiv Grotesk is pulled from TypeKit - Current kit availible on localhost, 127.0.0.1, and 0.0.0.0
 
-@font-family-sans-serif:  "aktiv-grotesk-std",sans-serif;
+@font-family-sans-serif:  "Proxima Nova",sans-serif;
 @font-family-serif:       Georgia, "Times New Roman", Times, serif;
 
 // Proxima Nova is pulled from a second TypeKit - Current kit availible on localhost, 127.0.0.1, and 0.0.0.0
