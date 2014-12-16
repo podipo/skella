@@ -1,6 +1,34 @@
 @import "../variables.less";
 @import "../../bower_components/bootstrap/less/mixins.less";
 
+// LSL Text Styles
+
+h2.lsl,
+h3.lsl {
+	letter-spacing: 0px;
+	text-transform: uppercase;
+	color: @brand-primary;
+}
+h2.lsl {
+	font-size: 22px;
+	line-height: 26px;
+	font-weight: 300;
+}
+
+h3.lsl {
+	font-size: 18px;
+	line-height: 20px;
+	font-weight: 400;
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
+
+hr.lsl {
+	color: @brand-primary;
+	border-bottom: 2px solid @gray;
+	margin-top: 15px;
+}
+
 .living-style-library-view {
 	position: relative;
 	height: 100%;
@@ -53,13 +81,32 @@
 	}
 }
 
+.view-wrapper {
+	margin-top: 60px;
+	margin-bottom: 80px;
+}
+
+.show-grid {
+	text-align: center;
+
+	.row > div {
+		border: 1px solid @gray-lighter;
+		overflow: hidden;
+	}
+}
+
+.btn-group-vertical > .btn{
+	margin-bottom: 5px;
+
+}
+
 .lsl-colors {
 	display: block;
 	margin-bottom: 20px;
 	> li {
 		display: inline-block;
 		vertical-align: top;
-		width: 140px;
+		width: 160px;
 		padding: 5px;
 		border: solid 1px @gray-lighter;
 		text-align: center;
@@ -73,17 +120,170 @@
 
 .frame-width-indicator {
 	width: 100%;
-	min-height: 20px;
+	min-height: 30px;
 	border: solid 1px #EEE;
 	border-bottom: none;
 	text-align: center;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 500;
+	line-height:30px;
 
-	&.xxs { background-color: #999; }
-	&.xs { background-color: #AAA; }
-	&.sm { background-color: #BBB; }
-	&.md { background-color: #CCC; }
-	&.lg { background-color: #DDD; }
+	&.xxs { background-color: @gray; }
+	&.xs { background-color: @gray; }
+	&.sm { background-color: @gray; }
+	&.md { background-color: @gray; }
+	&.lg { background-color: @gray; }
 }
+
+.code-snippet {
+	max-height: 2.5em;
+	overflow: hidden;
+	border-top: 1px solid @gray;
+	border-bottom: 1px solid @gray;
+	.CodeMirror {
+		height: inherit !important;
+		z-index: -1;
+	}
+}
+.code-expand-link {
+	float: right;
+}
+
+.btn-lsl{
+	font-family: @font-family-lsl;
+	background-color: #fff;
+	padding-left: 15px;
+	padding-right: 15px;
+
+	&:hover,
+	&.active{
+		color: #fff;
+		box-shadow: none;
+	}
+}
+
+.btn-lsl-xs{
+	color: @gray;
+	border-color: @gray;
+
+	&:hover,
+	&.active{
+		background-color: @gray;
+	}
+}
+.btn-lsl-sm{
+	color: @gray;
+	border-color: @gray;
+
+	&:hover,
+	&.active{
+		background-color: @gray;
+	}
+}
+.btn-lsl-md{
+	color: @gray;
+	border-color: @gray;
+
+	&:hover,
+	&.active{
+		background-color: @gray;
+	}
+}
+.btn-lsl-lg{
+	color: @gray;
+	border-color: @gray;
+
+	&:hover,
+	&.active{
+		background-color: @gray;
+	}
+}
+
+.lsl-modal{
+	padding: 40px 40px 60px !important;
+	background-color: @gray-light;
+	color: #fff;
+}
+
+// Fontcustom Font Preview
+
+.glyph {
+border-bottom: 1px dotted #ccc;
+padding: 10px 0 20px;
+margin-bottom: 20px;
+overflow: hidden;
+}
+
+.preview-glyphs { vertical-align: bottom; }
+
+.preview-scale {
+	color: #888;
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+.step {
+	display: inline-block;
+	line-height: 1;
+	position: relative;
+	width: 10%;
+}
+
+.step .letters,
+.step i {
+	-webkit-transition: opacity .3s;
+	-moz-transition: opacity .3s;
+	-ms-transition: opacity .3s;
+	-o-transition: opacity .3s;
+	transition: opacity .3s;
+}
+
+.step:hover .letters { opacity: 1; }
+.step:hover i { opacity: .3; }
+
+.letters {
+	opacity: 0;
+	position: absolute;
+}
+
+.characters-off .letters { display: none; }
+.characters-off .step:hover i { opacity: 1; }
+
+
+.size-12 { font-size: 12px; }
+
+.size-14 { font-size: 14px; }
+
+.size-16 { font-size: 16px; }
+
+.size-18 { font-size: 18px; }
+
+.size-21 { font-size: 21px; }
+
+.size-24 { font-size: 24px; }
+
+.size-36 { font-size: 36px; }
+
+.size-48 { font-size: 48px; }
+
+.size-60 { font-size: 60px; }
+
+.size-72 { font-size: 72px; }
+
+
+.usage { margin-top: 10px; }
+
+.usage input {
+	font-family: monospace;
+	margin-right: 3px;
+	padding: 2px 5px;
+	text-align: center;
+}
+
+.usage .point { width: 150px; }
+
+.usage .class { width: 250px; }
 
 /*
 	Copyright 2014 Podipo LLC, All Rights Reserved

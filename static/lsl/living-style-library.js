@@ -2,12 +2,17 @@ var lsl = lsl || {};
 lsl.views = lsl.views || {};
 
 // The bootstrap breakpoints.  If you change the breakpoints in variables.less then change them here.
+// < 768  xs
+// < 992  sm
+// < 1199 md
+//   1200 lg
+
+
 lsl.sizes = [
-	{'min':220, 'max':419, 'name':'xxs'},
-	{'min':420, 'max':639, 'name':'xs'},
-	{'min':640, 'max':921, 'name':'sm'},
-	{'min':922, 'max':1199, 'name':'md'},
-	{'min':1200, 'max':1000000000, 'name':'lg'}
+	{'min':320, 'max':767, 'name':'xs', 'class':'btn-lsl-xs'},
+	{'min':768, 'max':991, 'name':'sm', 'class':'btn-lsl-sm'},
+	{'min':992, 'max':1199, 'name':'md', 'class':'btn-lsl-md'},
+	{'min':1200, 'max':1000000000, 'name':'lg', 'class':'btn-lsl-lg'}
 ];
 
 
@@ -81,10 +86,10 @@ lsl.views.LivingStyleLibraryView = Backbone.View.extend({
 	},
 	createIframeControls: function(){
 		var controlDiv = new $.el.div({'class':'resize-button-groups'});
-		var createButton = function(title, width, fuzz){
+		var createButton = function(title, width, fuzz, btnClass){
 			var button = $.el.button({
 				'type':'button',
-				'class':'btn btn-default'
+				'class':'btn btn-lsl ' + btnClass
 			}, title);
 			$(button).click(function(event){
 				this.view.setDisplayWidth(this.width, fuzz, true);
@@ -93,9 +98,9 @@ lsl.views.LivingStyleLibraryView = Backbone.View.extend({
 		}.bind(this);
 		for(var i=0; i < lsl.sizes.length; i++){
 			var group = new $.el.div({'class':'btn-group'});
-			group.appendChild(createButton(lsl.sizes[i].name + '-min', lsl.sizes[i].min, false));
-			group.appendChild(createButton(lsl.sizes[i].name, lsl.sizes[i].min, true));
-			group.appendChild(createButton(lsl.sizes[i].name + '-max', lsl.sizes[i].max, false));
+			group.appendChild(createButton(lsl.sizes[i].name + '-min', lsl.sizes[i].min, false, lsl.sizes[i].class));
+			group.appendChild(createButton(lsl.sizes[i].name, lsl.sizes[i].min, true, lsl.sizes[i].class));
+			group.appendChild(createButton(lsl.sizes[i].name + '-max', lsl.sizes[i].max, false, lsl.sizes[i].class));
 			controlDiv.appendChild(group);
 		}
 		return controlDiv;
@@ -114,9 +119,14 @@ lsl.views.LivingStyleLibraryView = Backbone.View.extend({
 		}.bind(this);
 
 		group.appendChild(createButton('Introduction', '#introduction-view'));
-		group.appendChild(createButton('Type hierarchy', '#type-hierarchy-view'));
-		group.appendChild(createButton('Inline elements', '#inline-elements-view'));
 		group.appendChild(createButton('Colors', '#colors-view'));
+		group.appendChild(createButton('Typography', '#type-hierarchy-view'));
+		group.appendChild(createButton('Inline elements', '#inline-elements-view'));
+		group.appendChild(createButton('Buttons', '#buttons-view'));
+		group.appendChild(createButton('Grid', '#grid-view'));
+		group.appendChild(createButton('Navigation', '#navigation-view'));
+		group.appendChild(createButton('Dialogs', '#dialog-view'));
+		group.appendChild(createButton('Forms', '#forms-view'));
 
 		return group;
 	},
@@ -151,7 +161,7 @@ lsl.views.FrameWidthIndicator = Backbone.View.extend({
 		$(window).resize(this.handleWindowResize);
 	},
 	handleWindowResize: function(e){
-		var windowWidth = $(window).width();
+		var windowWidth = window.innerWidth;
 		for(var i=0; i < lsl.sizes.length; i++){
 			if(windowWidth >= lsl.sizes[i].min && windowWidth <= lsl.sizes[i].max){
 				this.$el.addClass(lsl.sizes[i].name);

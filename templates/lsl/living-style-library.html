@@ -22,239 +22,819 @@
 		</style>
 	</head>
 	<body>
-		<div class="view-wrapper" id="introduction-view">
-			<h1>This is the introduction view</h1>
+	<!-- Everything on the page but modals -->
+	<div id="modal-blur">
+
+
+	<!-- INTRODUCTION SECTION -->
+	<!-- -------------------- -->
+
+	<div class="view-wrapper" id="introduction-view">
+		<h2 class="lsl">Introduction</h2>
+		<hr class="lsl">
+		<p>Welcome to the Living Style Library. This is a living document that is a collection of all visual elements and patterns used in the site.</p>
+	</div>
+
+
+	<!-- COLORS SECTION -->
+	<!-- -------------- -->
+
+	<div class="view-wrapper" id="colors-view">
+		<h2 class="lsl">Colors</h2>
+		<hr class="lsl">
+		<ul class="lsl-colors">
+		<h3 class="lsl">Color Swatches</h3>
+
+			<li>
+				<span class="lsl-swatch bg-primary"></span>
+				<span class="lsl-label">primary | #COLOR</span>
+			</li>
+		</ul>
+
+		<h3 class="lsl">Gray Swatches</h3>
+		<ul class="lsl-colors">
+			<li>
+				<span class="lsl-swatch bg-grey"></span>
+				<span class="lsl-label">grey | #COLOR</span>
+			</li>
+		</ul>
+
+		<!-- Code Sample -->
+		<h3 class="lsl">Code Sample</h3>
+		<div class="code-snippet">Less Variables: @primary, @grey</div>
+	</div>
+
+
+
+	<!-- TYPE HIERARCHY SECTION -->
+	<!-- ---------------------- -->
+
+	<div class="view-wrapper" id="type-hierarchy-view">
+		<h2 class="lsl">Typography</h2>
+		<hr class="lsl">
+
+		<h1>H1 Headline</h1>
+		<h2>H2 Headline</h2>
+		<h3>H3 Subhead</h3>
+		<h4>H4 Subhead</h4>
+
+		<p><a class="link-large" href="#">Large Link</a></p>
+
+<!-- Code Sample -->
+<h3 class="lsl">Code Sample</h3>
+<div class="code-snippet" id="type-snippet"><h1>H1 Headline</h1>
+<h2>H2 Headline</h2>
+
+<h3>H3 Subhead</h3>
+
+<h4>H4 Subhead</h4>
+
+<p><a class="link-large" href="#">Large Link</a></p>
+</div>
+
+	</div>
+
+
+	<!-- INLINE ELEMENTS SECTION -->
+	<!-- ----------------------- -->
+
+	<div class="view-wrapper" id="inline-elements-view">
+		<h2 class="lsl">Inline elements</h2>
+		<hr class="lsl">
+		<h3 class="lsl">Text</h3>
+
+		<p>P Copy</p>
+
+		<p>Blog McSweeney's swag pug dreamcatcher, sartorial Odd Future High Life irony. Mlkshk seitan Banksy, Helvetica fanny pack normcore meh taxidermy you probably haven't heard of them slow-carb Intelligentsia typewriter artisan. Retro polaroid quinoa, cornhole synth deep v pickled before they sold out viral Thundercats.</p>
+
+		<p>Fingerstache butcher shabby chic, cold-pressed cliche hashtag street art sartorial tofu Intelligentsia farm-to-table ennui Pinterest High Life yr. Church-key craft beer farm-to-table photo booth seitan, slow-carb flexitarian irony keytar heirloom.</p>
+
+		<p><a href="#">This is a text link</a></p>
+
+		<p><a class="link-large" href="#">Large Link</a></p>
+
+		<p><strong>Strong is used to indicate strong importance</strong></p>
+
+		<p><em>This text has added emphasis</em></p>
+
+		<p>Superscript<sup>®</sup></p>
+
+		<p>Subscript for things like H<sub>2</sub>O</p>
+
+		<p><small>This small text is small for for fine print, etc.</small></p>
+
+		<p><q cite="https://developer.mozilla.org/en-US/docs/HTML/Element/q">This text is a short inline quotation</q></p>
+
+		<p><cite>This is a citation</cite>
+
+		<p>The <mark>mark element</mark> indicates a highlight</p>
+
+		<p><code>This is what inline code looks like.</code></p>
+
+<!-- Code Sample -->
+<h3 class="lsl">Code Sample</h3>
+<div class="code-snippet" id="code-snippet"><p>P Copy</p>
+<p>Blog McSweeney's swag pug dreamcatcher, sartorial Odd Future High Life irony. Mlkshk seitan Banksy, Helvetica fanny pack normcore meh taxidermy you probably haven't heard of them slow-carb Intelligentsia typewriter artisan. Retro polaroid quinoa, cornhole synth deep v pickled before they sold out viral Thundercats.</p>
+
+<p>Fingerstache butcher shabby chic, cold-pressed cliche hashtag street art sartorial tofu Intelligentsia farm-to-table ennui Pinterest High Life yr. Church-key craft beer farm-to-table photo booth seitan, slow-carb flexitarian irony keytar heirloom.</p>
+
+<p><a href="#">This is a text link</a></p>
+
+<p><a class="link-large" href="#">Large Link</a></p>
+
+<p><strong>Strong is used to indicate strong importance</strong></p>
+
+<p><em>This text has added emphasis</em></p>
+
+<p>Superscript<sup>®</sup></p>
+
+<p>Subscript for things like H<sub>2</sub>O</p>
+
+<p><small>This small text is small for for fine print, etc.</small></p>
+
+<p><q cite="https://developer.mozilla.org/en-US/docs/HTML/Element/q">This text is a short inline quotation</q></p>
+
+<p><cite>This is a citation</cite></p>
+
+<p>The <mark>mark element</mark> indicates a highlight</p>
+
+<p><code>This is what inline code looks like.</code></p></div>
+
+
+		<h3 class="lsl">Unordered list</h3>
+		<ul>
+			<li>This is a list item in an unordered list</li>
+			<li>An unordered list is a list in which the sequence of items is not important. Sometimes, an unordered list is a bulleted list. And this is a long list item in an unordered list that can wrap onto a new line. </li>
+			<li>
+				Lists can be nested inside of each other
+				<ul>
+					<li>This is a nested list item</li>
+					<li>This is another nested list item in an unordered list</li>
+				</ul>
+			</li>
+			<li>This is the last list item</li>
+		</ul>
+
+<!-- Code Sample -->
+<h3 class="lsl">Code Sample</h3>
+<div class="code-snippet" id="ul-snippet"><ul>
+	<li>This is a list item in an unordered list</li>
+	<li>An unordered list is a list in which the sequence of items is not important. Sometimes, an unordered list is a bulleted list. And this is a long list item in an unordered list that can wrap onto a new line. </li>
+	<li>
+		Lists can be nested inside of each other
+		<ul>
+			<li>This is a nested list item</li>
+			<li>This is another nested list item in an unordered list</li>
+		</ul>
+	</li>
+	<li>This is the last list item</li>
+</ul>
+</div>
+
+		<h3 class="lsl">Ordered list</h3>
+		<ol>
+			<li>This is a list item in an ordered list</li>
+			<li>An ordered list is a list in which the sequence of items is important. And this is a long list item in an unordered list that can wrap onto a new line. </li>
+			<li>
+				Lists can be nested inside of each other
+				<ol>
+					<li>This is a nested list item</li>
+					<li>This is another nested list item in an unordered list</li>
+				</ol>
+			</li>
+			<li>This is the last list item</li>
+		</ol>
+
+<!-- Code Sample -->
+<h3 class="lsl">Code Sample</h3>
+<div class="code-snippet" id="ol-snippet"><ol>
+	<li>This is a list item in an ordered list</li>
+	<li>An ordered list is a list in which the sequence of items is important. And this is a long list item in an unordered list that can wrap onto a new line. </li>
+	<li>
+		Lists can be nested inside of each other
+		<ol>
+			<li>This is a nested list item</li>
+			<li>This is another nested list item in an unordered list</li>
+		</ol>
+	</li>
+	<li>This is the last list item</li>
+</ol></div>
+
+		<h3 class="lsl">Horizontal Rule (HR)</h3>
+		<hr>
+
+		<!-- Code Sample -->
+		<h3 class="lsl">Code Sample</h3>
+		<div class="code-snippet"><hr></div>
+
+	</div>
+
+	<!-- BUTTONS SECTION -->
+	<!-- -------------- -->
+
+	<div class="view-wrapper" id="buttons-view">
+		<h2 class="lsl">Buttons</h2>
+		<hr class="lsl">
+		<!-- Standard button -->
+		<button type="button" class="btn btn-default">Default</button>
+
+		<!-- Deemphasize a button by making it look like a link while maintaining button behavior -->
+		<button type="button" class="btn btn-link">Link</button>
+
+<!-- Code Sample -->
+<h3 class="lsl">Code Sample</h3>
+<div class="code-snippet" id="button-snippet"><!-- Standard button -->
+<button type="button" class="btn btn-default">Default</button>
+<!-- Deemphasize a button by making it look like a link while maintaining button behavior -->
+<button type="button" class="btn btn-link">Link</button></div>
+	
+	</div>
+
+
+	<!-- CSS GRID SECTION -->
+	<!-- ---------------- -->
+
+	<div class="view-wrapper" id="grid-view">
+		<h2 class="lsl">CSS Grid</h2>
+		<hr class="lsl">
+		<p>The Living Style Library is built on the <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootrap grid</a>. In their words: Bootstrap includes a responsive, mobile first fluid grid system that appropriately scales up to 12 columns as the device or viewport size increases. It includes predefined classes for easy layout options, as well as powerful mixins for generating more semantic layouts.</p>
+		<div class="container-fluid show-grid">
+			<h4><span class="visible-xs">Currently Viewing</span>XS</h4>
+			<hr>
+			<div class="row">
+				<hr>
+				<div class="col-xs-1">.col-xs-1<hr></div>
+				<div class="col-xs-1">.col-xs-1<hr></div>
+				<div class="col-xs-1">.col-xs-1<hr></div>
+				<div class="col-xs-1">.col-xs-1<hr></div>
+				<div class="col-xs-1">.col-xs-1<hr></div>
+				<div class="col-xs-1">.col-xs-1<hr></div>
+				<div class="col-xs-1">.col-xs-1<hr></div>
+				<div class="col-xs-1">.col-xs-1<hr></div>
+				<div class="col-xs-1">.col-xs-1<hr></div>
+				<div class="col-xs-1">.col-xs-1<hr></div>
+				<div class="col-xs-1">.col-xs-1<hr></div>
+				<div class="col-xs-1">.col-xs-1<hr></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-8">.col-xs-8<hr></div>
+				<div class="col-xs-4">.col-xs-4<hr></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4">.col-xs-4<hr></div>
+				<div class="col-xs-4">.col-xs-4<hr></div>
+				<div class="col-xs-4">.col-xs-4<hr></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6">.col-xs-6<hr></div>
+				<div class="col-xs-6">.col-xs-6<hr></div>
+			</div>
+
+			<h4><span class="visible-sm">Currently Viewing</span>SM</h4>
+			<hr>
+			<div class="row">
+				<hr>
+
+				<div class="col-sm-1">.col-sm-1<hr></div>
+				<div class="col-sm-1">.col-sm-1<hr></div>
+				<div class="col-sm-1">.col-sm-1<hr></div>
+				<div class="col-sm-1">.col-sm-1<hr></div>
+				<div class="col-sm-1">.col-sm-1<hr></div>
+				<div class="col-sm-1">.col-sm-1<hr></div>
+				<div class="col-sm-1">.col-sm-1<hr></div>
+				<div class="col-sm-1">.col-sm-1<hr></div>
+				<div class="col-sm-1">.col-sm-1<hr></div>
+				<div class="col-sm-1">.col-sm-1<hr></div>
+				<div class="col-sm-1">.col-sm-1<hr></div>
+				<div class="col-sm-1">.col-sm-1<hr></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-8">.col-sm-8<hr></div>
+				<div class="col-sm-4">.col-sm-4<hr></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4">.col-sm-4<hr></div>
+				<div class="col-sm-4">.col-sm-4<hr></div>
+				<div class="col-sm-4">.col-sm-4<hr></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">.col-sm-6<hr></div>
+				<div class="col-sm-6">.col-sm-6<hr></div>
+			</div>
+			<h4><span class="visible-md">Currently Viewing</span>MD</h4>
+			<hr>
+			<div class="row">
+				<div class="col-md-1">.col-md-1<hr></div>
+				<div class="col-md-1">.col-md-1<hr></div>
+				<div class="col-md-1">.col-md-1<hr></div>
+				<div class="col-md-1">.col-md-1<hr></div>
+				<div class="col-md-1">.col-md-1<hr></div>
+				<div class="col-md-1">.col-md-1<hr></div>
+				<div class="col-md-1">.col-md-1<hr></div>
+				<div class="col-md-1">.col-md-1<hr></div>
+				<div class="col-md-1">.col-md-1<hr></div>
+				<div class="col-md-1">.col-md-1<hr></div>
+				<div class="col-md-1">.col-md-1<hr></div>
+				<div class="col-md-1">.col-md-1<hr></div>
+			</div>
+			<div class="row">
+				<div class="col-md-8">.col-md-8<hr></div>
+				<div class="col-md-4">.col-md-4<hr></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">.col-md-4<hr></div>
+				<div class="col-md-4">.col-md-4<hr></div>
+				<div class="col-md-4">.col-md-4<hr></div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">.col-md-6<hr></div>
+				<div class="col-md-6">.col-md-6<hr></div>
+			</div>
+
+			<h4><span class="visible-lg">Currently Viewing</span>LG</h4>
+			<hr>
+			<div class="row">
+				<hr>
+
+				<div class="col-lg-1">.col-lg-1<hr></div>
+				<div class="col-lg-1">.col-lg-1<hr></div>
+				<div class="col-lg-1">.col-lg-1<hr></div>
+				<div class="col-lg-1">.col-lg-1<hr></div>
+				<div class="col-lg-1">.col-lg-1<hr></div>
+				<div class="col-lg-1">.col-lg-1<hr></div>
+				<div class="col-lg-1">.col-lg-1<hr></div>
+				<div class="col-lg-1">.col-lg-1<hr></div>
+				<div class="col-lg-1">.col-lg-1<hr></div>
+				<div class="col-lg-1">.col-lg-1<hr></div>
+				<div class="col-lg-1">.col-lg-1<hr></div>
+				<div class="col-lg-1">.col-lg-1<hr></div>
+			</div>
+			<div class="row">
+				<div class="col-lg-8">.col-lg-8<hr></div>
+				<div class="col-lg-4">.col-lg-4<hr></div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4">.col-lg-4<hr></div>
+				<div class="col-lg-4">.col-lg-4<hr></div>
+				<div class="col-lg-4">.col-lg-4<hr></div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">.col-lg-6<hr></div>
+				<div class="col-lg-6">.col-lg-6<hr></div>
+			</div>
+
 		</div>
 
-		<div class="view-wrapper" id="type-hierarchy-view">
-			<h1>Type hierarchy</h1>
-			<h1>Heading Level 1</h1>
-			<h2>Heading Level 2</h2>
-			<h3>Heading Level 3</h3>
-			<h4>Heading Level 4</h4>
-			<h5>Heading Level 5</h5>
+		<!-- NAVIGATION SECTION -->
+		<!-- ------------------ -->
 
-			<h1 class="subheading">Subheading Level 1</h1>
-			<h2 class="subheading">Subheading Level 2</h2>
-			<h3 class="subheading">Subheading Level 3</h3>
-			<h4 class="subheading">Subheading Level 4</h4>
-			<h5 class="subheading">Subheading Level 5</h5>
+		<div class="view-wrapper" id="navigation-view">
+			<h2 class="lsl">Navigation</h2>
+			<hr class="lsl">
+			<!-- Nav Sample -->
+			<nav id="top-nav-top" class="navbar-default" role="navigation">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-nav-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a href="#">
+							<img id="brand-logo" alt="Logo" src="logo.svg">
+						</a>
+					</div>
+					<div id="top-nav-collapse" class="collapse navbar-collapse">
+						<ul class="nav navbar-nav navbar-default">
+							<li class="home-nav active">
+								<a href="#">Home</a>
+							</li>
+							<li class="example-nav">
+								<a href="#">Example</a>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="" class="username">Alice Smith</a>
+							</li>
+							<li class="dropdown dropdown-settings">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+									<span class="glyphicon glyphicon-cog"></span>
+								</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#">Something Else</a></li>
+									<li><a href="#">Another Thing</a></li>
+									<li><a href="#">Sign Out</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<!-- End Nav Sample -->
 
-			<h1><a href="#">Heading 1 with link</a></h1>
-			<h2><a href="#">Heading 2 with link</a></h2>
-			<h3><a href="#">Heading 3 with link</a></h3>
-			<h4><a href="#">Heading 4 with link</a></h4>
-			<h5><a href="#">Heading 5 with link</a></h5>
-			<h6><a href="#">Heading 6 with link</a></h6>
-
-			<h2>Paragraph text</h2>
-			<p>Blog McSweeney's swag pug dreamcatcher, sartorial Odd Future High Life irony. Mlkshk seitan Banksy, Helvetica fanny pack normcore meh taxidermy you probably haven't heard of them slow-carb Intelligentsia typewriter artisan. Retro polaroid quinoa, cornhole synth deep v pickled before they sold out viral Thundercats.</p>
-			<p>Fingerstache butcher shabby chic, cold-pressed cliche hashtag street art sartorial tofu Intelligentsia farm-to-table ennui Pinterest High Life yr. Church-key craft beer farm-to-table photo booth seitan, slow-carb flexitarian irony keytar heirloom.</p>
-
-			<h2>Blockquote</h2>
-			<blockquote>
-				<p>Hella polaroid Vice, umami iPhone meditation wayfarers. Pop-up seitan locavore gentrify fashion axe tote bag, photo booth heirloom umami trust fund.</p>
-				<p>Tumblr roof party chia authentic banh mi. Blog Schlitz chia YOLO, single-origin coffee actually asymmetrical master cleanse 3 wolf moon tattooed. Taxidermy quinoa pickled 3 wolf moon pour-over chambray. Mlkshk iPhone flannel sustainable freegan beard.</p>
-			</blockquote>
-
-			<h2>Code block</h2>
-			<pre><code>
-				var str=""
-				var isFizz = 0;
-				var isBuzz = 0;
-				for(var i = 1; i <= 100; i++) {
-					isFizz = i % 3 === 0;
-					isBuzz = i % 5 === 0;
-					if(isFizz) {
-						str += "fizz"
-					}
-					if (isBuzz) {
-						str += "buzz"
-					}
-					if (!(isFizz||isBuzz)) {
-						str+=a;
-					}
-					str+="\n"
-				}
-				console.log(str);
-			</code></pre>
-
-	<pre>P R E F O R M A T T E D T E X T
-	! " # $ % &amp; ' ( ) * + , - . /
-	0 1 2 3 4 5 6 7 8 9 : ; &lt; = &gt; ?
-	@ A B C D E F G H I J K L M N O
-	P Q R S T U V W X Y Z [ \ ] ^ _
-	` a b c d e f g h i j k l m n o
-	p q r s t u v w x y z { | } ~
-	</pre>
-
-			<h3>HR</h3>
-			<hr>
-
-			<h3>Unordered list</h3>
-			<ul>
-				<li>This is a list item in an unordered list</li>
-				<li>An unordered list is a list in which the sequence of items is not important. Sometimes, an unordered list is a bulleted list. And this is a long list item in an unordered list that can wrap onto a new line. </li>
+<!-- Code Sample -->
+<h3 class="lsl">Code Sample</h3>
+<div class="code-snippet" id="nav-snippet"><nav id="top-nav-top" class="navbar-default" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-nav-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="#">
+				<img id="brand-logo" alt="Logo" src="logo.svg">
+			</a>
+		</div>
+		<div id="top-nav-collapse" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-default">
+				<li class="home-nav active">
+					<a href="#">Home</a>
+				</li>
+				<li class="example-nav">
+					<a href="#">Example</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
 				<li>
-					Lists can be nested inside of each other
-					<ul>
-						<li>This is a nested list item</li>
-						<li>This is another nested list item in an unordered list</li>
+					<a href="" class="username">Alice Smith</a>
+				</li>
+				<li class="dropdown dropdown-settings">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+						<span class="glyphicon glyphicon-cog"></span>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Something Else</a></li>
+						<li><a href="#">Another Thing</a></li>
+						<li><a href="#">Sign Out</a></li>
 					</ul>
 				</li>
-				<li>This is the last list item</li>
 			</ul>
+		</div>
+	</div>
+</nav></div>
 
 		</div>
 
-		<div class="view-wrapper" id="inline-elements-view">
-			<h2>Inline elements</h2>
 
-			<p><a href="#">This is a text link</a></p>
+		<!-- DIALOGS SECTION -->
+		<!-- -------------- -->
 
-			<p><strong>Strong is used to indicate strong importance</strong></p>
+		<div class="view-wrapper" id="dialog-view">
+			<h2 class="lsl">Dialogs</h2>
+			<hr class="lsl">
 
-			<p><em>This text has added emphasis</em></p>
+			<h3 class="lsl">Modal Dialogs</h3>
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+				Launch demo modal
+			</button>
 
-			<p>The <b>b element</b> is stylistically different text from normal text, without any special importance</p>
+<!-- Code Sample -->
+<h3 class="lsl">Code Sample</h3>
+<div class="code-snippet" id="dialogs-snippet"><!-- Button trigger modal -->
+	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+		Launch demo modal
+	</button>
 
-			<p>The <i>i element</i> is text that is set off from the normal text</p>
+	<!-- Modal -->
+	<div class="modal modal-fullscreen fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				</div>
+				<div class="modal-body">
+					...
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-			<p>The <u>u element</u> is text with an unarticulated, though explicitly rendered, non-textual annotation</p>
-
-			<p><del>This text is deleted</del> and <ins>This text is inserted</ins></p>
-
-			<p><s>This text has a strikethrough</s></p>
-
-			<p>Superscript<sup>®</sup></p>
-
-			<p>Subscript for things like H<sub>2</sub>O</p>
-
-			<p><small>This small text is small for for fine print, etc.</small></p>
-
-			<p>Abbreviation: <abbr title="HyperText Markup Language">HTML</abbr></p>
-
-			<p>Keybord input: <kbd>Cmd</kbd></p>
-
-			<p><q cite="https://developer.mozilla.org/en-US/docs/HTML/Element/q">This text is a short inline quotation</q></p>
-
-			<p><cite>This is a citation</cite>
-
-			</p><p>The <dfn>dfn element</dfn> indicates a definition.</p>
-
-			<p>The <mark>mark element</mark> indicates a highlight</p>
-
-			<p><code>This is what inline code looks like.</code></p>
-
-			<p><samp>This is sample output from a computer program</samp></p>
-
-			<p>The <var>variable element</var>, such as <var>x</var> = <var>y</var></p>
-
-			<p><time datetime="2013-04-06T12:32+00:00">2 weeks ago</time></p>
+			<h2 class="lsl">Modal Typography</h2>
+			<div class="modal-fullscreen lsl-modal">
+				<h2>H2 Pop Headline</h2>
+				<h3>H3 Pop Subhead</h3>
+				<h4>H4 Pop Subhead</h4>
+				<p>P Pop</p>
+				<p>Blog McSweeney's swag pug dreamcatcher, sartorial Odd Future High Life irony. Mlkshk seitan Banksy, Helvetica fanny pack normcore meh taxidermy you probably haven't heard of them slow-carb Intelligentsia typewriter artisan. Retro polaroid quinoa, cornhole synth deep v pickled before they sold out viral Thundercats.</p>
+			</div>
 		</div>
 
-		<div class="view-wrapper" id="colors-view">
-			<h2>Colors</h2>
-			<ul class="lsl-colors">
-				<li>
-					<span class="lsl-swatch bg-lightest-blue"></span>
-					<span class="lsl-label">lightest-blue</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-light-blue"></span>
-					<span class="lsl-label">light-blue</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-dark-blue"></span>
-					<span class="lsl-label">dark-blue</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-red"></span>
-					<span class="lsl-label">red</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-orange"></span>
-					<span class="lsl-label">orange</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-green"></span>
-					<span class="lsl-label">green</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-aqua"></span>
-					<span class="lsl-label">aqua</span>
-				</li>
-			</ul>
+<!-- Code Sample -->
+<h3 class="lsl">Code Sample</h3>
+<div class="code-snippet" id="modal-type-snippet"><div class="modal">
+	<h2>H2 Pop Headline</h2>
+	<h3>H3 Pop Subhead</h3>
+	<h4>H4 Pop Subhead</h4>
+	<p>P Pop</p>
+	<p>Blog McSweeney's swag pug dreamcatcher, sartorial Odd Future High Life irony. Mlkshk seitan Banksy, Helvetica fanny pack normcore meh taxidermy you probably haven't heard of them slow-carb Intelligentsia typewriter artisan. Retro polaroid quinoa, cornhole synth deep v pickled before they sold out viral Thundercats.</p>
+</div></div>
 
-			<ul class="lsl-colors">
-				<li>
-					<span class="lsl-swatch bg-gray-darker"></span>
-					<span class="lsl-label">gray-darker</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-gray-dark"></span>
-					<span class="lsl-label">gray-dark</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-gray"></span>
-					<span class="lsl-label">gray</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-gray-light"></span>
-					<span class="lsl-label">gray-light</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-gray-lighter"></span>
-					<span class="lsl-label">gray-lighter</span>
-				</li>
-			</ul>
 
-			<ul class="lsl-colors">
-				<li>
-					<span class="lsl-swatch bg-primary"></span>
-					<span class="lsl-label">primary</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-success"></span>
-					<span class="lsl-label">success</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-info"></span>
-					<span class="lsl-label">info</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-warning"></span>
-					<span class="lsl-label">warning</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-danger"></span>
-					<span class="lsl-label">danger</span>
-				</li>
-			</ul>
+<!-- FORMS SECTION -->
+		<div class="view-wrapper" id="forms-view">
+			<h2 class="lsl">Forms</h2>
+			<hr class="lsl">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+						<h2>Form Headline</h2>
+						<hr>
+						<h3 class="form-subhead">Form Subhead</h3>
+						<form class="form-horizontal" role="form">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Name</label>
+								<div class="col-sm-5">
+									<p class="form-control-static">Alice Smith</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Phone</label>
+								<div class="col-sm-5">
+									<p class="form-control-static">(555) 603-1200</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Email</label>
+								<div class="col-sm-5">
+									<p class="form-control-static">alice@example.com</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Dropdown</label>
+								<div class="col-sm-5">
+									<p class="form-control-static">phone</p>
+								</div>
+							</div>
+						</form>
 
-			<ul class="lsl-colors">
-				<li>
-					<span class="lsl-swatch bg-title-gray-light"></span>
-					<span class="lsl-label">title-gray-light</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-title-gray"></span>
-					<span class="lsl-label">title-gray</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-title-gray-bg"></span>
-					<span class="lsl-label">title-gray-bg</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-title-gray-dark-bg"></span>
-					<span class="lsl-label">title-gray-dark-bg</span>
-				</li>
-				<li>
-					<span class="lsl-swatch bg-title-tab"></span>
-					<span class="lsl-label">title-tab</span>
-				</li>
-			</ul>
+<!-- Code Sample -->
+<h3 class="lsl">Code Sample</h3>
+<div class="code-snippet" id="forms-snippet"><h2>Form Headline</h2>
+<hr>
+<h3 class="form-subhead">Form Subhead</h3>
+<form class="form-horizontal" role="form">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Name</label>
+		<div class="col-sm-5">
+			<p class="form-control-static">Alice Smith</p>
 		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Phone</label>
+		<div class="col-sm-5">
+			<p class="form-control-static">(555) 603-1200</p>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Email</label>
+		<div class="col-sm-5">
+			<p class="form-control-static">alice@example.com</p>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Dropdown</label>
+		<div class="col-sm-5">
+			<p class="form-control-static">phone</p>
+		</div>
+	</div>
+</form></div>
+
+						<h3 class="form-subhead">Form Subhead Edit</h3>
+						<form class="form-horizontal" role="form">
+							<div class="form-group">
+								<label for="inputName" class="col-sm-2 control-label">Name</label>
+								<div class="col-sm-5">
+									<input type="email" class="form-control" id="inputName" placeholder="Name">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputEmail" class="col-sm-2 control-label">Phone</label>
+								<div class="col-sm-5">
+									<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputTel" class="col-sm-2 control-label">Telephone</label>
+								<div class="col-sm-5">
+									<input type="tel" class="form-control" id="inputTel" placeholder="(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;&nbsp;&nbsp;&nbsp;-">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputPassword" class="col-sm-2 control-label">Email</label>
+								<div class="col-sm-5">
+									<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputDropdown" class="col-sm-2 control-label">Dropdown</label>
+								<div class="col-sm-5">
+									<input type="email" class="form-control" id="inputDropdown" placeholder="Dropdown">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="form-offset col-sm-5">
+									<div class="form-buttons">
+										<button type="button" class="btn btn-link">cancel</button>
+										<button type="submit" class="btn btn-default">Sign in</button>
+									</div>
+								</div>
+							</div>
+						</form>
+
+<!-- Code Sample -->
+<h3 class="lsl">Code Sample</h3>
+<div class="code-snippet" id="forms-snippet"><h3 class="form-subhead">Form Subhead Edit</h3>
+<form class="form-horizontal" role="form">
+	<div class="form-group">
+		<label for="inputName" class="col-sm-2 control-label">Name</label>
+		<div class="col-sm-5">
+			<input type="email" class="form-control" id="inputName" placeholder="Name">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputEmail" class="col-sm-2 control-label">Phone</label>
+		<div class="col-sm-5">
+			<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputTel" class="col-sm-2 control-label">Telephone</label>
+		<div class="col-sm-5">
+			<input type="tel" class="form-control" id="inputTel" placeholder="(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;&nbsp;&nbsp;&nbsp;-">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputPassword" class="col-sm-2 control-label">Email</label>
+		<div class="col-sm-5">
+			<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputDropdown" class="col-sm-2 control-label">Dropdown</label>
+		<div class="col-sm-5">
+			<input type="email" class="form-control" id="inputDropdown" placeholder="Dropdown">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="form-offset col-sm-5">
+			<div class="form-buttons">
+				<button type="button" class="btn btn-link">cancel</button>
+				<button type="submit" class="btn btn-default">Sign in</button>
+			</div>
+		</div>
+	</div>
+</form></div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- SAMPLE MODAL -->
+
+<!-- Modal -->
+<div class="modal modal-fullscreen fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="row">
+				<div class="modal-header col-xs-10 col-xs-push-1 col-lg-8 col-lg-push-2">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-10 col-xs-push-1 col-lg-8 col-lg-push-2">
+							<h2>Form Headline</h2>
+							<hr>
+							<h3 class="form-subhead">Form Subhead</h3>
+							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Name</label>
+									<div class="col-sm-5">
+										<p class="form-control-static">Alice Smith</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Phone</label>
+									<div class="col-sm-5">
+										<p class="form-control-static">(555) 867-5309</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Email</label>
+									<div class="col-sm-5">
+										<p class="form-control-static">alice@example.com</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Dropdown</label>
+									<div class="col-sm-5">
+										<p class="form-control-static">phone</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="form-offset col-sm-5">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox"> Remember me
+											</label>
+										</div>
+									</div>
+								</div>
+							</form>
+
+							<h3 class="form-subhead">Form Subhead Edit</h3>
+							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<label for="inputName" class="col-sm-2 control-label">Name</label>
+									<div class="col-sm-5">
+										<input type="email" class="form-control" id="inputName" placeholder="Name">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail" class="col-sm-2 control-label">Phone</label>
+									<div class="col-sm-5">
+										<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputTel" class="col-sm-2 control-label">Telephone</label>
+									<div class="col-sm-5">
+										<input type="tel" class="form-control" id="inputTel" placeholder="(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;&nbsp;&nbsp;&nbsp;-">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputPassword" class="col-sm-2 control-label">Email</label>
+									<div class="col-sm-5">
+										<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputDropdown" class="col-sm-2 control-label">Dropdown</label>
+									<div class="col-sm-5">
+										<input type="email" class="form-control" id="inputDropdown" placeholder="Dropdown">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="checkbox">
+										<label>
+											<input type="checkbox"> Remember me
+										</label>
+									</div>
+								</div>
+								<hr>
+								<div class="radio-group">
+									<div class="radio">
+										<label>
+											<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+											Option one is this and that&mdash;be sure to include why it's great
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+											Option two can be something else and selecting it will deselect option one
+										</label>
+									</div>
+									<div class="radio disabled">
+										<label>
+											<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+											Option three is disabled
+										</label>
+									</div>
+								</div>
+								<hr>
+								<div class="form-group">
+									<div class="col-xs-12">
+										<button type="submit" class="btn btn-default btn-right">Sign in</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 
 		<script src="../lib/jquery/jquery.js"></script>
 		<script src="../lib/underscore/underscore.js"></script>
@@ -265,7 +845,13 @@
 		<script src="../site.js"></script>
 		<script src="living-style-library.js"></script>
 
+		<!-- CodeMirror -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/codemirror.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/xml/xml.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/codemirror.css" />
+
 		<script>
+			var locationId = "#introduction-view";
 			// Handle messages from the parent frame
 			window.addEventListener('message', function(message){
 				if(message.data.action == 'showAnchor'){
@@ -278,10 +864,72 @@
 				}
 			})
 			$(document).ready(function(){
+				// Frame width handler
 				window.frameWidthIndicator = new lsl.views.FrameWidthIndicator({});
 				$('body').append(window.frameWidthIndicator.el);
 				window.frameWidthIndicator.handleWindowResize();
+				// Set up the code snippets
+				$('.code-snippet').each(formatCodeSnippet);
+				$('.code-snippet').each(addCodeExpandLink);
+				$('.code-expand-link').click(handleCodeExpandClick);
+				// Pin the content to the view while resizing
+				var dummyNav = $.el.div({'class':'dummyNav', 'style':'display:none'});
+				var list = $.el.ul({'class':'nav'});
+				dummyNav.appendChild(list);
+				$('.view-wrapper').each(function(index, wrapper) {
+					list.appendChild($.el.li($.el.a({'href':'#'+ $(wrapper).attr('id') }, "Check")));
+				});
+				$('body').append(dummyNav);
+				$('body').scrollspy({target:'.dummyNav'});
+				$('.dummyNav').on('activate.bs.scrollspy', function (el) {
+					window.locationId = $(el.target).find('a').first().attr('href');
+				});
+				$(window).resize(function(){
+					$('html, body').animate({
+						//scrollTop: $(locationId).offset().top
+					}, 0);
+				});
 			});
+			function formatCodeSnippet() {
+				var $this = $(this),
+				$code = $this.html();
+				$this.empty();
+				var myCodeMirror = CodeMirror(this, {
+					value: $code,
+					"mode": "text/html",
+					"readOnly":true,
+					"theme": "default",
+					"autoClearEmptyLines": true,
+					"lineWrapping": true,
+					"lineNumbers": true
+				});
+			}
+			function addCodeExpandLink(index, target){
+				var targetID = $(target).attr('id');
+				if(!targetID) {
+					// If it has no ID then it won't have an expand/shrink link
+					$(target).css({'max-height':'inherit'});
+					return;
+				}
+				var link = $.el.a({
+					'href':'.',
+					'class':'code-expand-link',
+					'expand-target': '#' + $(target).attr('id')
+				}, 'expand');
+				$(target).after(link);
+			}
+			function handleCodeExpandClick(event){
+				event.preventDefault()
+				var expandTargetID = $(event.target).attr('expand-target');
+				console.log('mh', $(expandTargetID).css('max-height'));
+				if( $(expandTargetID).css('max-height') == 'none' ){
+					$(expandTargetID).css({'max-height':'2.5em'});
+					$(event.target).text('expand');
+				} else {
+					$(expandTargetID).css({'max-height':'inherit'});
+					$(event.target).text('collapse');
+				}
+			}
 		</script>
 	</body>
 	<!-- 
