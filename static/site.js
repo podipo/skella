@@ -2,6 +2,57 @@
 var skella = skella || {};
 skella.views = {};
 
+$(document).ready(function(){
+	window.schema.on(skella.events.SchemaPopulated, skella.views.schemaPopulated);
+})
+
+skella.views.schemaPopulated = function(){
+	window.schema.api.User.prototype.displayName = function(){
+		if(this.get('first-name')){
+			var result = this.get('first-name');
+			if(this.get('last-name')){
+				result += ' ' + this.get('last-name');
+			}
+			return result;
+		}
+		return this.get('email');
+	}
+
+	skella.views.updateAccountNav();
+	if(window.schema && window.schema.user){
+		// React to changes to the user
+		window.schema.on(skella.events.LoggedIn, skella.views.updateAccountNav);
+		window.schema.on(skella.events.LoggedOut, skella.views.updateAccountNav);
+		window.schema.user.on('change:first-name', skella.views.updateAccountNav);
+		window.schema.user.on('change:last-name', skella.views.updateAccountNav);
+		window.schema.user.on('change:email', skella.views.updateAccountNav);
+	}
+	if(window.schema){
+		window.schema.on(skella.events.LoggedIn, skella.views.updateAccountNav);
+	}
+}
+
+skella.views.updateAccountNav = function(){
+	var value = "";
+	var topNav = $('#top-nav-collapse');
+	var userNav = topNav.find('.account-nav');
+	var usernameEl = userNav.find('.username');
+	var authedDropdown = topNav.find('.dropdown-authed');
+	var anonymousDropdown = topNav.find('.dropdown-anonymous');
+	if(skella.api.loggedIn() && window.schema.user) {
+		usernameEl.text(window.schema.user.displayName());
+		userNav.show();
+		authedDropdown.show();
+		anonymousDropdown.hide();
+	} else {
+		userNav.hide();
+		usernameEl.text("");
+		authedDropdown.hide();
+		anonymousDropdown.show();
+
+	}
+}
+
 /*
 	A helper function which appends child to parent and returns child.
 	Enables code like: `var button = $.a(this.el, $.el.button());`
@@ -10,6 +61,22 @@ $.a = function(parent, child){
 	$(parent).append(child);
 	return child;
 }
+
+
+skella.urlParams = {}; // This will be populated with the parameters in the document.location;
+
+// Copied from http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+(window.onpopstate = function () {
+	var match,
+		pl     = /\+/g,  // Regex for replacing addition symbol with a space
+		search = /([^&=]+)=?([^&]*)/g,
+		decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+		query  = window.location.search.substring(1);
+	skella.urlParams = {};
+	while (match = search.exec(query)){
+	   skella.urlParams[decode(match[1])] = decode(match[2]);
+	}
+})();
 
 /*
 	options:
@@ -87,7 +154,7 @@ skella.views.LoginView = Backbone.View.extend({
 		));
 
 		this.passwordFormGroup = $.a(this.el, skella.views.generateInputFormGroup(
-			'text',
+			'password',
 			'password', 'password', 
 			'Password', 'password'
 		));
@@ -118,7 +185,11 @@ skella.views.LoginView = Backbone.View.extend({
 		skella.api.login(email, password, this.handleLoginSuccess, this.handleLoginFailure); 
 	},
 	handleLoginSuccess: function(){
-		document.location.href = "/";
+		if(skella.urlParams.next) {
+			document.location.href = skella.urlParams.next;
+		} else {
+			document.location.href = "/";
+		}
 	},
 	handleLoginFailure: function(){
 		this.showError('Email or password do not match.');
@@ -155,7 +226,6 @@ skella.views.APIDocView = Backbone.View.extend({
 		this.options = options;
 		if(!this.options.schema) throw 'This view requires an options.schema';
 		var endpoints = this.options.schema.get('endpoints');
-		console.log("Endpoints", endpoints);
 		for(var i=0; i < endpoints.length; i++){
 			this.$el.append(new skella.views.EndpointView({
 				'endpoint':endpoints[i]

@@ -27,6 +27,24 @@
 					<a href="/api/">API Docs</a>
 				</li>
 			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="account-nav" class="hidden-xs hidden-sm">
+					<a href="/account/" class="username"></a>
+				</li>
+				<li class="dropdown dropdown-settings">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+						<span class="icon-gear-fill">Gear</span>
+						<span class="visible-xs-inline-block"> Settings</span>
+						<span class="caret visible-xs-inline-block"></span>
+						<!-- <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> -->
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li class="dropdown-authed"><a href="/account/">Account</a></li>
+						<li class="dropdown-authed"><a href="/logout/">Log Out</a></li>
+						<li class="dropdown-anonymous"><a href="/login/">Log In</a></li>
+					</ul>
+				</li>
+			</ul>
 		</div>
 	</div>
 </nav>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Account | {{site.name}}</title>
+		{{> site-styles}}
+		<style>
+		</style>
+	</head>
+	<body>
+		<div id="body-container">
+			{{> top-nav}}		
+			<div id="page-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							<h1>Account information</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			{{> footer}}
+			{{> site-scripts}}
+			<script>
+				$(document).ready(function(){
+					window.schema.on(skella.events.SchemaPopulated, init);
+				});
+				function init(){
+					if(!window.schema.user || window.schema.user.isNew()){
+						document.location.href = '/login/?next=/account/';
+					}
+				}
+			</script>
+		</div>
+	</body>
+	{{> copyright}}
+</html>
