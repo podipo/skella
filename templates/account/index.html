@@ -17,6 +17,10 @@
 							<h1>Account information</h1>
 						</div>
 					</div>
+					<div class="row">
+						<div id="editor-col" class="col-xs-12 col-sm-4">
+						</div>
+					</div>
 				</div>
 			</div>
 			{{> footer}}
@@ -29,6 +33,8 @@
 					if(!window.schema.user || window.schema.user.isNew()){
 						document.location.href = '/login/?next=/account/';
 					}
+					window.editorView = new skella.views.UserEditorView({'model':window.schema.user});
+					$('#editor-col').append(window.editorView.el);
 				}
 			</script>
 		</div>

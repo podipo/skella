@@ -196,6 +196,46 @@ skella.views.LoginView = Backbone.View.extend({
 	}
 });
 
+skella.views.UserEditorView = Backbone.View.extend({
+	'class':'user-editor-view',
+	initialize: function(options){
+		this.options = options;
+		if (!this.options.model) throw 'UserEditorView requires a model option';
+		this.form = $.el.form({'class':'form-horizontal', 'role':'form'});
+		this.$el.append(this.form);
+
+		this.emailGroup = $.a(this.form, skella.views.generateInputFormGroup(
+			"static", "email", "email", "email", "email"
+		));
+		skella.views.bindTextInput("email", this.options.model, $(this.emailGroup).find('.form-control-static'));
+
+		this.firstNameGroup = $.a(this.form, skella.views.generateInputFormGroup(
+			"text", "first-name", "first-name", "first name", "first name"
+		));
+		skella.views.bindTextInput("first-name", this.options.model, $(this.firstNameGroup).find('input'));
+
+		this.lastNameGroup = $.a(this.form, skella.views.generateInputFormGroup(
+			"text", "last-name", "last-name", "last name", "last name"
+		));
+		skella.views.bindTextInput("last-name", this.options.model, $(this.lastNameGroup).find('input'));
+	}
+});
+
+// Show the current value of the field in the input, then use user input to update the model
+skella.views.bindTextInput = function(fieldName, model, input){
+	var $input = $(input);
+	if($input.hasClass('form-control-static')){
+		$input.text(model.get(fieldName) || "");
+	} else {
+		$input.val(model.get(fieldName) || "");
+	}
+	$input.keyup(function(event){
+		if($input.val() != model.get(fieldName)){
+			model.set(fieldName, $input.val());
+		}
+	});
+}
+
 skella.views.generateCheckbox = function(name, id, label){
 	var formGroup = $.el.div({'class':'form-group checkbox-form-group'});
 	var checkboxDiv = $.el.div({'class':'checkbox'});
@@ -204,18 +244,29 @@ skella.views.generateCheckbox = function(name, id, label){
 	return formGroup;
 }
 
+/*
+Generate a form for use in a bootstrap style form.
+Pass an inputType of "static" if it should just be a display field.
+*/
 skella.views.generateInputFormGroup = function(inputType, name, id, label, placeholder){
 	var formGroup = $.el.div({'class':'form-group input-form-group'});
 	formGroup.appendChild($.el.label({
 		'for':name,
 		'class':'control-label'
 	}, label));
-	var input = $.el.input({
-		'id':id,
-		'type':inputType,
-		'class':'form-control',
-		'placeholder':placeholder
-	});
+	if(inputType == 'static'){
+		var input = $.el.span({
+			'id':id,
+			'class':'form-control-static'
+		})
+	} else {
+		var input = $.el.input({
+			'id':id,
+			'type':inputType,
+			'class':'form-control',
+			'placeholder':placeholder
+		});
+	}
 	formGroup.appendChild($.el.div({'class':'input-wrapper'}, input));
 	return formGroup;
 }

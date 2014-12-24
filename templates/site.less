@@ -69,6 +69,136 @@ body{
 .bg-gray-light { background-color: @gray-light }
 .bg-gray-lighter { background-color: @gray-lighter }
 
+
+// Clear shadow stuff
+input.form-control,
+input.form-control:focus {
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	-moz-transition: none;
+	-webkit-transition: none;
+}
+
+.form-subhead{
+	@media (min-width: @screen-sm){
+		margin-bottom: 20px;
+	}
+}
+
+.form-horizontal{
+	padding-bottom: 20px;
+
+	.control-label {
+		.make-sm-column(2);
+
+		color: @gray;
+		font-weight: 500;
+		margin-bottom: 0;
+
+		@media (min-width: @screen-sm){
+			width: 140px;
+		}
+	}
+	.form-control-col {
+		.make-sm-column(5);
+	}
+}
+
+.form-horizontal .control-label {
+	text-align: left;
+}
+
+.form-group{
+	margin-bottom: 20px;
+	@media (min-width: @screen-sm){
+		margin-bottom: 6px;
+	}
+}
+
+.radio-group{
+	.clearfix();
+
+	margin-bottom: 20px;
+
+	@media (min-width: @screen-sm){
+		margin-bottom: 20px;
+	}
+}
+
+// Placeholder text is all proprietary:
+.form-control:-moz-placeholder {
+	font-style: italic;
+}
+.form-control::-moz-placeholder {
+	font-style: italic;
+}
+.form-control:-ms-input-placeholder {
+	font-style: italic;
+}
+.form-control::-webkit-input-placeholder {
+	font-style: italic;
+}
+
+.form-control {
+	color: @gray;
+	border-color: @gray-lighter;
+	height: 28px;
+	font-size: inherit;
+	max-width: 400px;
+	padding: 0px 9px 1px;
+	margin-top: 10px;
+
+	@media (min-width: @screen-sm){
+		margin-top: 0;
+		max-width: 230px;
+		height: 24px;
+		padding: 0px 8px 1px;
+	}
+}
+
+.form-buttons {
+	max-width: 400px;
+
+	& button:last-of-type {
+		.pull-right;
+	}
+
+	@media (min-width: @screen-sm){
+		max-width: 230px;
+	}
+}
+
+.form-control-static{
+	@media (min-width: @screen-sm){
+		padding-top: 2px;
+		padding-bottom: 2px;
+		padding-left: 10px;
+	}
+}
+
+.form-offset{
+	.make-sm-column(5);
+
+	@media (min-width: @screen-sm){
+		margin-left: 140px;
+	}
+}
+
+label {
+	font-weight: inherit;
+}
+
+.checkbox {
+	@media (min-width: @screen-sm){
+		margin-left: 15px;
+	}
+
+	> label {
+		font-weight: 300;
+	}
+}
+
 .page-login-view {
 	.error {
 		padding: 15px;
