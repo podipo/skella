@@ -220,13 +220,14 @@ skella.views.UserImageEditorView = Backbone.View.extend({
 	className:'user-image-editor-view',
 	initialize: function(options){
 		this.options = options;
-		_.bindAll(this, 'handleInputChanged', 'handleImageUploaded', 'handleUploadError', 'handleImageLoaded');
+		_.bindAll(this, 'handleInputChanged', 'handleImageUploaded', 'handleUploadError', 'handleImageLoaded', 'handleImageError');
 		this.imageView = $.a(this.el, $.el.div({'class':'user-image'}));
 
 		this.userImage = new Image();
 		this.imageView.appendChild(this.userImage);
-		this.userImage.onload = this.imageLoaded;
-		this.userImage.src = '/api/0.1.0/user/current/image';
+		this.userImage.onload = this.handleImageLoaded;
+		this.userImage.onerror = this.handleImageError;
+		this.userImage.src = '/api/' + window.API_VERSION + '/user/current/image';
 
 		this.form = $.a(this.$el, $.el.form());
 		this.fileInput = $.a(this.form, $.el.input({'type':'file', 'name':'image'}));
@@ -236,7 +237,7 @@ skella.views.UserImageEditorView = Backbone.View.extend({
 		var formData = new FormData();
 		formData.append('image', this.fileInput.files[0]);
 		$.ajax({
-			url: '/api/0.1.0/user/current/image',
+			url: '/api/' + window.API_VERSION + '/user/current/image',
 			data: formData,
 			headers :  {
 				'Accept': skella.schema.acceptFormat + window.API_VERSION
@@ -250,14 +251,16 @@ skella.views.UserImageEditorView = Backbone.View.extend({
 		});
 	},
 	handleImageUploaded: function(){
-		console.log("Image uploaded");
 		this.userImage.src = '/api/0.1.0/user/current/image?t=' + new Date().getTime();
 	},
 	handleUploadError: function(){
 		console.log("Image upload error");
 	},
+	handleImageError: function(){
+		$(this.userImage).hide();
+	},
 	handleImageLoaded: function(){
-		console.log("Image loaded");
+		$(this.userImage).show();
 	}
 });
 
