@@ -18,8 +18,8 @@
 						</div>
 					</div>
 					<div class="row">
-						<div id="editor-col" class="col-xs-12 col-sm-4">
-						</div>
+						<div id="editor-col" class="col-xs-12 col-sm-4"></div>
+						<div id="image-editor-col" class="col-xs-12 col-sm-4 col-sm-offset-1"></div>
 					</div>
 				</div>
 			</div>
@@ -35,6 +35,8 @@
 					}
 					window.editorView = new skella.views.UserEditorView({'model':window.schema.user});
 					$('#editor-col').append(window.editorView.el);
+					window.imageEditorView = new skella.views.UserImageEditorView({'model':window.schema.user});
+					$('#image-editor-col').append(window.imageEditorView.el);
 				}
 			</script>
 		</div>

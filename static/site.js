@@ -196,8 +196,73 @@ skella.views.LoginView = Backbone.View.extend({
 	}
 });
 
+skella.views.ModelSavingView = Backbone.View.extend({
+	className:'model-saving-view',
+	tagName: 'span',
+	initialize: function(options){
+		_.bindAll(this, 'startSpinning', 'stopSpinning');
+		this.options = options;
+		this.spinner = $.a(this.$el, $.el.i({'class':'glyphicon glyphicon-save'}));
+		$(this.spinner).hide();
+		this.options.model.on('request', this.startSpinning);
+		this.options.model.on('sync', this.stopSpinning);
+		this.options.model.on('error', this.stopSpinning);
+	},
+	startSpinning: function(){
+		$(this.spinner).show();
+	},
+	stopSpinning: function(){
+		$(this.spinner).hide();
+	}
+})
+
+skella.views.UserImageEditorView = Backbone.View.extend({
+	className:'user-image-editor-view',
+	initialize: function(options){
+		this.options = options;
+		_.bindAll(this, 'handleInputChanged', 'handleImageUploaded', 'handleUploadError', 'handleImageLoaded');
+		this.imageView = $.a(this.el, $.el.div({'class':'user-image'}));
+
+		this.userImage = new Image();
+		this.imageView.appendChild(this.userImage);
+		this.userImage.onload = this.imageLoaded;
+		this.userImage.src = '/api/0.1.0/user/current/image';
+
+		this.form = $.a(this.$el, $.el.form());
+		this.fileInput = $.a(this.form, $.el.input({'type':'file', 'name':'image'}));
+		$(this.fileInput).change(this.handleInputChanged);
+	},
+	handleInputChanged: function(){
+		var formData = new FormData();
+		formData.append('image', this.fileInput.files[0]);
+		$.ajax({
+			url: '/api/0.1.0/user/current/image',
+			data: formData,
+			headers :  {
+				'Accept': skella.schema.acceptFormat + window.API_VERSION
+			},
+			cache: false,
+			contentType: false,
+			processData: false,
+			type: 'PUT',
+			success: this.handleImageUploaded,
+			error: this.handleUploadError
+		});
+	},
+	handleImageUploaded: function(){
+		console.log("Image uploaded");
+		this.userImage.src = '/api/0.1.0/user/current/image?t=' + new Date().getTime();
+	},
+	handleUploadError: function(){
+		console.log("Image upload error");
+	},
+	handleImageLoaded: function(){
+		console.log("Image loaded");
+	}
+});
+
 skella.views.UserEditorView = Backbone.View.extend({
-	'class':'user-editor-view',
+	className:'user-editor-view',
 	initialize: function(options){
 		this.options = options;
 		if (!this.options.model) throw 'UserEditorView requires a model option';
@@ -218,8 +283,36 @@ skella.views.UserEditorView = Backbone.View.extend({
 			"text", "last-name", "last-name", "last name", "last name"
 		));
 		skella.views.bindTextInput("last-name", this.options.model, $(this.lastNameGroup).find('input'));
+
+		this.modelSavingView = new skella.views.ModelSavingView({'model':this.options.model});
+		this.form.appendChild(this.modelSavingView.el);
+
+		skella.views.autosave(this.options.model, 1000, null, null, null);
 	}
 });
+
+/*
+autosave watches the model for changes and then calls save after `wait` milliseconds.
+This used when you have someone editing a model and want to save after they stop for a bit.
+*/
+skella.views.autosave = function(model, wait, startCallback, successCallback, errorCallback) {
+	var previousAttributes = _.clone(model.attributes);
+	delete previousAttributes['updated'];
+	var changeHandler = _.throttle(function(){
+		var newAttributes = _.clone(model.attributes);
+		delete newAttributes['updated'];
+		if(_.isEqual(previousAttributes, newAttributes)){
+			return;
+		}
+		previousAttributes = newAttributes;
+		var options = {};
+		if(successCallback) options['success'] = successCallback;
+		if(errorCallback) options['error'] = errorCallback;
+		if(startCallback) startCallback();
+		model.save(null, options);
+	}, wait, {'leading':false});
+	model.on('change', changeHandler);
+}
 
 // Show the current value of the field in the input, then use user input to update the model
 skella.views.bindTextInput = function(fieldName, model, input){
