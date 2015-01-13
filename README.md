@@ -77,6 +77,11 @@ If you want to run the tests in [phantomjs](http://phantomjs.org/) then run this
 
 To add tests, edit /static/tests/tests.js.
 
+# Possible future work
+
+- switch to [live server](https://github.com/tapio/live-server)
+- try out [jspm](http://jspm.io/) and [systemjs](https://github.com/systemjs/systemjs)
+
 # License
 
 This project is an effort of [Podipo](http://podipo.com/) but depends on a HUGE ecosystem of open source code.  So, what kind of people would we be if we kept Skella all to ourselves?
