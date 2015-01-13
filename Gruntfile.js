@@ -108,6 +108,12 @@ module.exports = function (grunt) {
 						'cwd': 'static/', 
 						'src': ['**'], 
 						'dest': 'dist/'
+					},
+					{
+						'expand': true,
+						'cwd': 'bower_components/jquery/dist', 
+						'src': ['**'], 
+						'dest': 'dist/lib/jquery/'
 					}
 				]
 			}

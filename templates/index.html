@@ -25,7 +25,7 @@
 					window.daysFlipView = new coss.views.DaysFlipView({
 						'saints': window.saints
 					});
-					$('#flip-col').append(window.daysFlipView.render().el);
+					$('#flip-col').append(window.daysFlipView.el);
 					window.saints.fetch({
 						error: function(){ console.log("Error loading saints", arguments); }
 					});

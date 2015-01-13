@@ -85,6 +85,7 @@ coss.views.DaysFlipView = Backbone.View.extend({
 		this.saintIndex = 0;
 		this.navDate = null;
 		this.options.saints.on('sync', this.handleReset);
+		this.render();
 	},
 	navToDay: function(month, date){
 		document.location.href = '#' + month + '-' + date;
@@ -95,7 +96,6 @@ coss.views.DaysFlipView = Backbone.View.extend({
 			this.navDate = [month, date];
 			return;
 		}
-
 		// Ok, we have saints and a nav date, let's go there
 		this.saintIndex = this.options.saints.findByDate(month, date);
 		var saint = this.options.saints.at(this.saintIndex);
@@ -132,15 +132,22 @@ coss.views.DaysFlipView = Backbone.View.extend({
 		if(this.options.saints.length == 0){
 			return this;
 		}
-
-		var leftAnchor = $('<a id="left-day-arrow" class="day-arrow" href=".">&laquo;</a>');
-		this.$el.append(leftAnchor);
-		var rightAnchor = $('<a id="right-day-arrow" class="day-arrow" href=".">&raquo;</a>');
-		this.$el.append(rightAnchor);
+		var leftAnchor = $.a(this.el, $.el.a({
+			'id':'left-day-arrow',
+			'class':'day-arrow',
+			'href':'.'
+		}));
+		$(leftAnchor).html('&laquo;');
+		var rightAnchor = $.a(this.el, $.el.a({
+			'id':'right-day-arrow',
+			'class':'day-arrow',
+			'href':'.'
+		}));
+		$(rightAnchor).html('&raquo;');
 
 		var saint = this.options.saints.at(this.saintIndex);
 		this.$el.append($.el.h2(saint.getDateDisplay()));
-		var dayDetailView = new coss.views.DayDetailView({model:saint});
+		var dayDetailView = new coss.views.DayDetailView({'model':saint});
 		this.$el.append(dayDetailView.render().el);
 		return this;
 	}
@@ -150,23 +157,15 @@ coss.views.PicView = Backbone.View.extend({
 	className: 'pic-view',
 	initialize: function(options){
 		this.options = options;
-		_.bindAll(this, 'render');
-	},
-	render: function(){
 		this.$el.empty();
 		this.$el.append($.el.img({'src':this.options.image[0]}));
 		this.$el.append($.el.a({'href':this.options.image[1], 'target':'_blank'}, 'source'));
-		return this;
 	}
 })
 
 coss.views.DayDetailView = Backbone.View.extend({
 	className: 'day-detail-view',
 	initialize: function(){
-		_.bindAll(this, 'render');
-	},
-	render: function(){
-		this.$el.empty();
 		this.$el.append($.el.h1(this.model.getSaintDayName()));
 
 		var deets = $.el.div({'class':'day-detail-deets'});
@@ -185,13 +184,14 @@ coss.views.DayDetailView = Backbone.View.extend({
 		for(var i=0; i < patronage.length; i++){
 			patronageList.appendChild($.el.li(patronage[i]));
 		}
-
-		var bodyDiv = $('<div>' + this.model.get('body') + '</div>');
+		
+		var bodyDiv = $.el.div();
+		$(bodyDiv).html(this.model.get('body'));
 		if(this.model.get('image')){
-			bodyDiv.prepend(new coss.views.PicView({'image':this.model.get('image')}).render().el);
+			$(bodyDiv).prepend(new coss.views.PicView({'image':this.model.get('image')}).el);
 		}
 
-		this.$el.append($.el.div({'class':'day-detail-body'}, bodyDiv[0]));
+		this.$el.append($.el.div({'class':'day-detail-body'}, bodyDiv));
 
 		// Now link to All The Things... (G+, Twitter, FB)
 		var shortMessage = "Celebrate " + this.model.getSaintDayName() + " on the Calendar of Science Saints: " + this.model.getFullUrl();
