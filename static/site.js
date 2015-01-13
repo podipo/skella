@@ -3,7 +3,7 @@ var skella = skella || {};
 skella.views = {};
 
 $(document).ready(function(){
-	window.schema.on(skella.events.SchemaPopulated, skella.views.schemaPopulated);
+	//window.schema.on(skella.events.SchemaPopulated, skella.views.schemaPopulated);
 })
 
 skella.views.schemaPopulated = function(){

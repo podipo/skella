@@ -4,17 +4,13 @@
 		<meta charset="utf-8">
 		<title>{{site.name}}</title>
 		{{> site-styles}}
-		<style>
-			#big-heart { font-size: 10em; }
-		</style>
 	</head>
 	<body>
 			{{> top-nav}}		
 			<div id="page-wrapper">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-xs-12 col-sm-offset-3 col-sm-6 text-center">
-							<h1><i id="big-heart" class="glyphicon glyphicon-heart"></i></h1>
+						<div id="flip-col" class="col-xs-12 col-sm-offset-2 col-sm-8">
 						</div>
 					</div>
 				</div>
@@ -24,6 +20,17 @@
 			<script>
 				$(document).ready(function(){
 					$('.home-nav').addClass('active');
+
+					window.saints = new coss.api.Saints();
+					window.daysFlipView = new coss.views.DaysFlipView({
+						'saints': window.saints
+					});
+					$('#flip-col').append(window.daysFlipView.render().el);
+					window.saints.fetch({
+						error: function(){ console.log("Error loading saints", arguments); }
+					});
+
+					Backbone.history.start();
 				});
 			</script>
 	</body>
