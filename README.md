@@ -1,7 +1,7 @@
 # Skella Front End
 
 <div style="text-align: center;">
-	<img width="150" style="float: left; margin: 0 20px 2px 0;"  src="http://podipo.github.io/skella/images/Skella.png" /> 
+	<img width="150" style="float: left; margin: 0 20px 2px 0;"  src="http://podipo.github.io/skella/images/Skella-logo-300.png" /> 
 </div>
 
 The [Skella](http://github.com/podipo/skella/) front end is a web project skeleton. It is intended to be a good starting place for new projects or example code for people who want to stop using Notepad and FTP to build web sites.
