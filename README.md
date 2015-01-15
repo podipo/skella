@@ -1,4 +1,4 @@
-# Skella Front End
+# Skella Front End by [Podipo](https://podipo.com/)
 
 <div style="text-align: center;">
 	<img width="150" style="float: left; margin: 0 20px 2px 0;"  src="http://podipo.github.io/skella/images/Skella-logo-300.png" /> 
