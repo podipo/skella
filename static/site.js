@@ -6,6 +6,12 @@ $(document).ready(function(){
 	window.schema.on(skella.events.SchemaPopulated, skella.views.schemaPopulated);
 })
 
+// Date and time formats used with moment.js
+skella.DateFormat = 'MMM D, YYYY';
+skella.MonthFormat = 'MMM, YYYY';
+skella.TimestampFormat = 'MMMM D, YYYY hh:mm:SS a';
+
+
 skella.views.schemaPopulated = function(){
 	window.schema.api.User.prototype.displayName = function(){
 		if(this.get('first-name')){
