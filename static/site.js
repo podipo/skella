@@ -3,7 +3,9 @@ var skella = skella || {};
 skella.views = {};
 
 $(document).ready(function(){
-	window.schema.on(skella.events.SchemaPopulated, skella.views.schemaPopulated);
+	if(window.schema){
+		window.schema.on(skella.events.SchemaPopulated, skella.views.schemaPopulated);
+	}
 })
 
 // Date and time formats used with moment.js
