@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Logs | {{site.name}}</title>
+		{{> site-styles}}
+		<style>
+		</style>
+	</head>
+	<body>
+		<div id="body-container">
+			{{> top-nav}}		
+			<div id="page-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div id="view-col" class="col-xs-12">
+						</div>
+					</div>
+				</div>
+			</div>
+			{{> footer}}
+			{{> site-scripts}}
+			<script>
+				$(document).ready(function(){
+					$('.example-nav').addClass('active');
+					window.schema.on(skella.events.SchemaPopulated, init);
+				});
+
+				function init(){
+					window.logs = new window.schema.api.Logs();
+					var fetcher = new skella.Fetcher(logs);
+					fetcher.on(skella.events.FetcherComplete, handleFetcherComplete);
+					fetcher.fetch();
+				}
+
+				function handleFetcherComplete(){
+					window.router = new example.views.LogRouter({
+						'logs':window.logs,
+						'el':$('#view-col')
+					});
+
+					Backbone.history.start({
+						root: "/example/log/"
+					});
+				}
+			</script>
+		</div>
+	</body>
+	{{> copyright}}
+</html>

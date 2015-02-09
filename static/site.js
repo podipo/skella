@@ -1,6 +1,9 @@
 /* This is where the site-wide special sauce lives. */
 var skella = skella || {};
-skella.views = {};
+skella.views = skella.views || {};
+skella.events = skella.events || {};
+
+skella.events.FetcherComplete = 'fetcher-complete';
 
 $(document).ready(function(){
 	if(window.schema){
@@ -87,6 +90,49 @@ skella.urlParams = {}; // This will be populated with the parameters in the docu
 })();
 
 /*
+	Fetches all of the Models or Collections and waits until they're all finished and triggers a fetchComplete on itself
+	Create like so: new skella.Fetcher(ModelOrCollection, ModelOrCollection, ...)
+	Copied from https://github.com/TrevorFSmith/phlogiston/blob/master/phlogiston/static/phlogiston/phlogiston.js
+*/
+skella.Fetcher = function() {
+	this.fetchables = []; // A 2D array of [Model/Collection, isFetched]
+
+	var setTrue = function() {
+		this[1] = true;
+	};
+
+	var triggerOnComplete = function() {
+		if (this.completed()) {
+			this.trigger(skella.events.FetcherComplete, this);
+		}
+	};
+
+	for (var i = 0; i < arguments.length; i++) {
+		var info = this.fetchables[i] = [arguments[i], false];
+		arguments[i].once('sync', _.bind(setTrue, info));
+		arguments[i].once('sync', _.bind(triggerOnComplete, this));
+	}
+	this.initialize.apply(this, arguments);
+};
+_.extend(skella.Fetcher.prototype, Backbone.Events, {
+	initialize: function() { /* override as needed */ },
+	fetch: function() {
+		for (var i = 0; i < this.fetchables.length; i++) {
+			this.fetchables[i][0].fetch();
+		}
+	},
+	completed: function() {
+		for (var i = 0; i < this.fetchables.length; i++) {
+			if (this.fetchables[i][1] === false) {
+				return false;
+			}
+		}
+		return true;
+	}
+});
+
+
+/*
 	options:
 		collection: a Backbone.Collection
 		itemView: the Backbone.View which will be used to present an item in the list
@@ -99,10 +145,10 @@ skella.views.AbstractCollectionView = Backbone.View.extend({
 	tagName: 'section',
 	initialize: function(options){
 		this.options = options;
-		_.bindAll(this);
+		_.bindAll(this, 'reset', 'add', 'remove');
 		this.$el.addClass('collection-view');
 		this.itemViews = [];
-		this.itemList = $.el.ul();
+		this.itemList = $.el.div({'class':'item-list'});
 
 		if(this.options.title){
 			this.$el.append($.el.h1(this.options.title));
@@ -135,13 +181,13 @@ skella.views.AbstractCollectionView = Backbone.View.extend({
 				if(val == null || val == '') return;
 			}
 		}
-		this.itemViews[this.itemViews.length] = new this.options.itemView({'model':item, 'parentView':this});
+		this.itemViews[this.itemViews.length] = new this.options.itemView({'model':item, 'parentView':this, 'parent':this.collection});
 		if(this.options.itemClasses){
 			this.itemViews[this.itemViews.length - 1].$el.addClass(this.options.itemClasses);
 		}
 		this.itemList.appendChild(this.itemViews[this.itemViews.length - 1].render().el);
 	},
-	remove: function(idea){
+	remove: function(item){
 		console.log('TODO remove', arguments);
 	}
 })
@@ -394,8 +440,8 @@ skella.views.EndpointView = Backbone.View.extend({
 	initialize: function(options){
 		this.options = options;
 		if(!this.options.endpoint) throw 'EndpointView requires an options.endpoint';
-		this.$el.append($.el.h2(this.options.endpoint.path));
-		this.$el.append($.el.h3(this.options.endpoint.title));
+		this.$el.append($.el.h2(this.options.endpoint.title));
+		this.$el.append($.el.h3(this.options.endpoint.path));
 		this.$el.append($.el.div({'class':'description'}, this.options.endpoint.description));
 
 		var propertyTable = $.a(this.el, $.el.table({'class':'property-table'}));
