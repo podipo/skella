@@ -190,7 +190,7 @@ skella.views.AbstractCollectionView = Backbone.View.extend({
 	remove: function(item){
 		console.log('TODO remove', arguments);
 	}
-})
+});
 
 skella.views.LoginView = Backbone.View.extend({
 	className: 'login-view form-horizontal',

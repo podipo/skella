@@ -63,6 +63,7 @@ module.exports = function (grunt) {
 					'online': false,
 					'notify': false,
 					'port': 8000,
+					'injectChanges': false,
 					'server': {
 						'baseDir': 'dist',
 						'index': 'index.html'
