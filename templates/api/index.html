@@ -27,7 +27,14 @@
 			<script>
 				$(document).ready(function(){
 					$('.api-docs-nav').addClass('active');
-					schema.on('sync', initPage);
+					if(!window.schema){
+						$('#api-view-col').append($.el.h3('No API was found.  Is the ', $.el.a({
+							'href':'https://github.com/podipo/skellago/',
+							'target': '_new'
+						}, 'Skella backend'), ' running?'))
+					} else {
+						schema.on('sync', initPage);
+					}
 				});
 				function initPage(){
 					window.apiDocView = new skella.views.APIDocView({'schema':window.schema});

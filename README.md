@@ -79,7 +79,6 @@ To add tests, edit /static/tests/tests.js.
 
 # Possible future work
 
-- switch to [live server](https://github.com/tapio/live-server)
 - try out [jspm](http://jspm.io/) and [systemjs](https://github.com/systemjs/systemjs)
 
 # License
