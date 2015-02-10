@@ -14,7 +14,7 @@ $(document).ready(function(){
 // Date and time formats used with moment.js
 skella.DateFormat = 'MMM D, YYYY';
 skella.MonthFormat = 'MMM, YYYY';
-skella.TimestampFormat = 'MMMM D, YYYY hh:mm:SS a';
+skella.TimestampFormat = 'MM/D/YY HH:mm';
 
 
 skella.views.schemaPopulated = function(){
@@ -400,15 +400,23 @@ Pass an inputType of "static" if it should just be a display field.
 */
 skella.views.generateInputFormGroup = function(inputType, name, id, label, placeholder){
 	var formGroup = $.el.div({'class':'form-group input-form-group'});
-	formGroup.appendChild($.el.label({
-		'for':name,
-		'class':'control-label'
-	}, label));
+	if(label){
+		formGroup.appendChild($.el.label({
+			'for':name,
+			'class':'control-label'
+		}, label));
+	}
 	if(inputType == 'static'){
 		var input = $.el.span({
 			'id':id,
 			'class':'form-control-static'
-		})
+		});
+	} else if(inputType == 'textarea'){
+		var input = $.el.textarea({
+			'id':id,
+			'class':'form-control',
+			'placeholder':placeholder
+		});
 	} else {
 		var input = $.el.input({
 			'id':id,

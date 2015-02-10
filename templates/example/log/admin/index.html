@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Logs Admin | {{site.name}}</title>
+		{{> site-styles}}
+		<style>
+		</style>
+	</head>
+	<body>
+		<div id="body-container">
+			{{> top-nav}}		
+			<div id="page-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div id="view-col" class="col-xs-12">
+						</div>
+					</div>
+				</div>
+			</div>
+			{{> footer}}
+			{{> site-scripts}}
+			<script src="/admin.js"></script>
+			<script>
+				$(document).ready(function(){
+					$('.example-nav').addClass('active');
+					window.schema.on(skella.events.SchemaPopulated, init);
+				});
+
+				function showError(message){
+					$('view-col').append(message);
+				}
+
+				function init(){
+					if(!window.schema.user || window.schema.user.isNew()){
+						document.location.href = '/login/?next=/example/log/admin/';
+						return;
+					}
+
+					window.logs = new window.schema.api.Logs();
+					window.logs.fetch({
+						'success': handleLogsFetched,
+						'error': function(){
+							console.log('Error fetching logs', arguments);
+							showError('There was an error fetching the logs.');
+						}
+					});
+				}
+
+				function handleLogsFetched(){
+					if(window.logs.length == 0){
+						showError('There are no logs to administer.');
+						return;
+					}
+
+					// TODO figure out how to display multiple logs and choose one to edit
+					var logEntries = new window.schema.api.LogEntries({
+						'slug': window.logs.at(0).get('slug')
+					});
+					logEntries.fetch({
+						'success': handleEntriesFetched,
+						'error': function(){
+							showError('There was an error fetching log entries.');
+							return;
+						}
+					});
+				}
+
+				function handleEntriesFetched(logEntries){
+					var collectionAdminView = new skella.views.CollectionAdminView({
+						'collection': logEntries,
+						'itemTitle': 'subject'
+					});
+					$('#view-col').append(collectionAdminView.el);
+				}
+			</script>
+		</div>
+	</body>
+	{{> copyright}}
+</html>

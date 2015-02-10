@@ -4,6 +4,30 @@ This is example funcationality for the Skellago example APIs like Echo
 var example = example || {};
 example.views = example.views || {};
 
+// Extend the API with functionality specific to the example APIs
+$(document).ready(function(){
+	if(!window.schema) return;
+
+	window.schema.on(skella.events.SchemaPopulated, function(){
+
+		// Entry is unusual in that it takes either its id or its slug in its url.
+		// So, we need to customize the Backbone.Model.url function to be a little smart.
+		window.schema.api.Entry.prototype.url = function(){
+			if(typeof this.get('id') != 'undefined' && this.get('id') !== null){
+				return skella.schema.generateURL(this.schema.path, this.attributes);
+			}
+			// Temporarily set the id to slug and then generate the URL
+			this.set('id', this.get('slug'));
+			var result = skella.schema.generateURL(this.schema.path, this.attributes);
+			this.set('id', null);
+			return result;
+		}
+
+	});
+});
+
+
+
 /*
 EchoView simply GETs to the Echo resource and displays the resulting (predictable) response.
 */

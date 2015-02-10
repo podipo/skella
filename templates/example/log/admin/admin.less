@@ -1,0 +1,49 @@
+.collection-admin-view {
+	.make-row();
+
+	.items-view {
+		.make-xs-column(12);
+		.make-sm-column(3);
+		.list-group-item {
+			cursor: pointer;
+		}
+	}
+
+	.focus-view {
+		.make-xs-column(12);
+		.make-sm-column(7);
+		label {
+			font-size: 1.2em;
+			margin-bottom: 0;
+		}
+		.description {
+			font-size: 0.8em;
+		}
+	}
+
+	.controls-view {
+		.make-xs-column(12);
+		.make-sm-column(2);
+
+		button {
+			min-width: 10em;
+			display: block;
+			margin-bottom: 10px;
+		}
+	}
+}
+
+.admin-edit-view {
+	margin-bottom: 40px;
+	.form-control {
+		max-width: 100%;
+	}
+}
+
+.admin-edit-view {
+}
+.admin-long-string-edit-view {
+	textarea {
+		height: 10em;
+	}
+}
