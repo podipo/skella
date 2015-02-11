@@ -15,7 +15,7 @@ Options:
 skella.views.CollectionAdminView = Backbone.View.extend({
 	className: 'collection-admin-view row',
 	initialize: function(options){
-		_.bindAll(this, 'addItem', 'handleItemSelected', 'removeItem', 'handleSync', 'clearItems', 'saveRequested', 'deleteRequested');
+		_.bindAll(this, 'addItem', 'handleItemSelected', 'removeItem', 'handleSync', 'clearItems', 'addRequested', 'saveRequested', 'deleteRequested', 'handleSaveSuccess', 'handleSaveError', 'disableControls', 'enableControls', 'handleDeletionModalClick');
 		this.options = options;
 		if(typeof this.options.collection == 'undefined') throw 'This view requires a collection option';
 		if(typeof this.options.itemTitle == 'undefined') throw 'This view requires an itemTitle option';
@@ -25,9 +25,13 @@ skella.views.CollectionAdminView = Backbone.View.extend({
 			this.itemView = this.options.itemView;
 		}
 
-		// The view containing the list of items
+		// The lefthand view containing the list of items
 		this.itemsView = $.el.div({'class':'items-view list-group'});
 		this.$el.append(this.itemsView);
+
+		this.addItemEl = $.el.div({'class':'add-item list-group-item'}, $.el.span({'class':'glyphicon glyphicon-plus'}), ' Add');
+		this.itemsView.appendChild(this.addItemEl);
+		$(this.addItemEl).click(this.addRequested)
 
 		// The views of individual items
 		this.itemViews = [];
@@ -48,26 +52,64 @@ skella.views.CollectionAdminView = Backbone.View.extend({
 
 		this.deleteButton = $.el.button({'class':'btn btn-warning'},'Delete');
 		this.controlsView.appendChild(this.deleteButton);
-		$(this.saveButton).click(this.deleteRequested);
+		$(this.deleteButton).click(this.deleteRequested);
 
-		this.collection.on('sync', this.handleSync);
+		this.disableControls();
+
+		// TODO add pagination when there are more records than were returned
+		this.collection.once('sync', this.handleSync);
+	},
+	enableControls: function(){
+		$(this.controlsView).show();
+	},
+	disableControls: function(){
+		$(this.controlsView).hide();
 	},
 	saveRequested: function(){
 		if(this.currentFocusItemView == null) return;
 		this.savingView.startSpinning();
-		this.currentFocusItemView.model.save({
+		this.currentFocusItemView.model.save({}, {
 			'success':this.handleSaveSuccess,
 			'error':this.handleSaveError
-		})
+		});
 	},
 	handleSaveSuccess: function(){
-		this.savingView.stopSpinning();
+		this.savingView.stopSpinning(true);
 	},
 	handleSaveError: function(){
-		this.savingView.stopSpinning();
+		this.savingView.stopSpinning(false);
+		//TODO show an error message
 	},
 	deleteRequested: function(){
 		if(this.currentFocusItemView == null) return;
+		var title = this.currentFocusItemView.model.get(this.options.itemTitle);
+		this.modal = skella.views.generateConfirmationModal('Confirm deletion', 'Are you certain that you want to delete "' + title + '"?', this.handleDeletionModalClick);
+		$(this.modal).modal({});
+	},
+	handleDeletionModalClick: function(buttonText){
+		$(this.modal).modal('hide').remove();
+		this.modal = null;
+		if(buttonText == 'Ok'){
+			this.performDelete();
+		}
+	},
+	performDelete: function(){
+		if(this.currentFocusItemView == null) return;
+		this.savingView.startSpinning();
+		this.currentFocusItemView.model.destroy({
+			'success': function(){
+				this.savingView.stopSpinning(true);
+				this.removeItem(this.currentFocusItemView.model);
+			}.bind(this),
+			'error': function(){ 
+				this.savingView.stopSpinning(false);
+			}.bind(this)
+		});
+	},
+	addRequested: function(){
+		var newModel = this.collection.add({});
+		var view = this.addItem(newModel);
+		this.handleItemSelected(view);
 	},
 	handleSync: function(){
 		this.clearItems();
@@ -86,15 +128,46 @@ skella.views.CollectionAdminView = Backbone.View.extend({
 		view.$el.addClass('list-group-item');
 		view.on(skella.events.AdminItemSelected, this.handleItemSelected);
 		this.itemViews[this.itemViews.length] = view;
-		this.itemsView.appendChild(view.el);
+		$(this.addItemEl).before(view.el);
+		return view;
+	},
+	removeItem: function(model){
+		for(var i=0; i < this.itemViews.length; i++){
+			if(this.itemViews[i].model.id == model.id){
+				this.itemViews[i].remove();
+				this.itemViews = _.without(this.itemViews, this.itemViews[i]);
+				break;
+			}
+		}
+
+		if(this.currentFocusItemView && model.id == this.currentFocusItemView.model.id){
+			this.currentFocusItemView.remove();
+			this.currentFocusItemView = null
+			this.savingView.remove();
+			this.savingView = null;
+		}
+
+		if(this.itemViews.length >= 0){
+			this.handleItemSelected(this.itemViews[0]);
+		} else {
+			this.handleItemSelected(null);
+		}
 	},
 	handleItemSelected: function(itemView){
 		$(this.itemsView).find('.list-group-item').removeClass('active');
-		itemView.$el.addClass('active');
 		if(this.currentFocusItemView != null){
 			this.currentFocusItemView.remove();
 			this.currentFocusItemView = null;
+			this.savingView.remove();
+			this.savingView = null;
 		}
+
+		if(itemView == null){
+			this.disableControls();
+			return;
+		}
+
+		itemView.$el.addClass('active');
 		this.currentFocusItemView = new skella.views.AdminFocusItemView({
 			'model':itemView.model,
 			'itemTitle': this.options.itemTitle
@@ -105,9 +178,7 @@ skella.views.CollectionAdminView = Backbone.View.extend({
 			'model':itemView.model
 		});
 		this.controlsView.appendChild(this.savingView.el);
-	},
-	removeItem: function(model){
-		console.log("TODO: remove item");
+		this.enableControls();
 	},
 	clearItems: function(){
 		for(var i=0; i < this.itemViews.length; i++){
@@ -154,8 +225,6 @@ skella.views.AdminFocusItemView = Backbone.View.extend({
 					new editView(_.extend(prop, {'model':this.model})).el
 				));
 			}
-
-
 		} catch(e) {
 			console.log("Exception", e);
 		}
@@ -263,8 +332,14 @@ skella.views.AdminItemView = Backbone.View.extend({
 		this.options = options;
 		if(typeof this.options.model == 'undefined') throw 'This view requires a model option';
 		if(typeof this.options.itemTitle == 'undefined') throw 'This view requires an itemTitle option';
-		this.$el.append($.el.div(this.model.get(this.options.itemTitle)));
+		var title = this.model.get(this.options.itemTitle) || "New";
+
+		this.inputGroup = $.a(this.el, skella.views.generateInputFormGroup(
+			"static", this.options.itemTitle, this.options.itemTitle, null, "New"
+		));
+		this.$el.append(this.inputGroup);
 		this.$el.click(function(){ this.trigger(skella.events.AdminItemSelected, this); }.bind(this));
+		skella.views.bindModelDisplay(this.options.itemTitle, this.model, $(this.inputGroup).find('.form-control-static'), 'No Title');
 	}
 });
 

@@ -13,14 +13,16 @@ $(document).ready(function(){
 		// Entry is unusual in that it takes either its id or its slug in its url.
 		// So, we need to customize the Backbone.Model.url function to be a little smart.
 		window.schema.api.Entry.prototype.url = function(){
-			if(typeof this.get('id') != 'undefined' && this.get('id') !== null){
-				return skella.schema.generateURL(this.schema.path, this.attributes);
+			if(this.isNew()){
+				if(this.collection){
+					return this.collection.url();
+				}
+				if(typeof this.get('log-id') == 'undefined'){
+					throw 'Unable to generate a URL without a collection or a log-id';
+				}
+				return new window.schema.api.LogEntries({'id':this.get('log-id')}).url();
 			}
-			// Temporarily set the id to slug and then generate the URL
-			this.set('id', this.get('slug'));
-			var result = skella.schema.generateURL(this.schema.path, this.attributes);
-			this.set('id', null);
-			return result;
+			return skella.schema.generateURL(this.schema.path, this.attributes);
 		}
 
 	});
@@ -70,8 +72,8 @@ LogRouter routes everything from /example/log/... to a list of logs, an individu
 example.views.LogRouter = Backbone.Router.extend({
 	routes: {
 		"": "logs",
-		":logSlug/:slug": "entry",
-		":slug": "log"
+		":logId/:id": "entry",
+		":id": "log"
 	},
 	initialize: function(options){
 		_.bindAll(this, 'logs', 'log', 'handleLogFetch', 'handleEntryFetch', 'entry');
@@ -82,8 +84,8 @@ example.views.LogRouter = Backbone.Router.extend({
 		this.$el = $(this.options.el);
 
 		this.logsView = null;
-		this.logModels = {}; // a map of <slug> to schema.api.Log
-		this.entryModels = {}; // a map of <log-slug> to a map of <entry-slug> to schema.api.Entry
+		this.logModels = {}; // a map of <id> to schema.api.Log
+		this.entryModels = {}; // a map of <log-id> to a map of <entry-id> to schema.api.Entry
 	},
 	logs: function() {
 		if(!this.logsView){
@@ -96,41 +98,41 @@ example.views.LogRouter = Backbone.Router.extend({
 		this.$el.empty();
 		this.$el.append(this.logsView.el);
 	},
-	log: function(slug) {
+	log: function(id) {
 		this.$el.empty();
-		if(typeof this.logModels[slug] == 'undefined'){
-			this.logModels[slug] = new window.schema.api.Log({'slug':slug});
-			this.logModels[slug].fetch({
+		if(typeof this.logModels[id] == 'undefined'){
+			this.logModels[id] = new window.schema.api.Log({'id':id});
+			this.logModels[id].fetch({
 				'success':this.handleLogFetch,
 				'error':function(){ console.log("TODO: handle this error", arguments); }
 			});
 		} else {
-			this.$el.append(this.logModels[slug].view.el);
+			this.$el.append(this.logModels[id].view.el);
 		}
 	},
 	handleLogFetch: function(model){
-		var slug = model.get('slug');
+		var id = model.get('id');
 		var view = new example.views.LogView({
 			'model':model
 		});
-		this.logModels[slug].view = view;
+		this.logModels[id].view = view;
 		this.$el.empty();
 		this.$el.append(view.el);
 	},
-	entry: function(logSlug, entrySlug) {
+	entry: function(logId, id) {
 		this.$el.empty();
-		if(typeof this.entryModels[logSlug] == 'undefined'){
-			this.entryModels[logSlug] = {};
+		if(typeof this.entryModels[logId] == 'undefined'){
+			this.entryModels[logId] = {};
 		}
-		if(typeof this.entryModels[logSlug][entrySlug] == 'undefined'){
-			this.entryModels[logSlug][entrySlug] = new window.schema.api.Entry({'slug':entrySlug});
-			this.entryModels[logSlug][entrySlug].fetch({
+		if(typeof this.entryModels[logId][id] == 'undefined'){
+			this.entryModels[logId][id] = new window.schema.api.Entry({'id':id});
+			this.entryModels[logId][id].fetch({
 				'success':this.handleEntryFetch,
 				'error':function(){ console.log("TODO: handle this error", arguments); }
 
 			})
 		} else {
-			this.$el.append(this.entryModels[logSlug][entrySlug].view.el);
+			this.$el.append(this.entryModels[logId][id].view.el);
 		}
 	},
 	handleEntryFetch: function(model){
@@ -147,7 +149,7 @@ example.views.EntryItemView = Backbone.View.extend({
 	initialize: function(options){
 		this.options = options;
 		this.$el.append($.el.h4($.el.a(
-			{'href':'#' + this.options.parent.options.slug + '/' + this.model.get('slug')},
+			{'href':'#' + this.options.parent.options.id + '/' + this.model.get('id')},
 			this.model.get('subject')
 		)));
 		this.$el.append($.el.div({'class':'content'}, this.model.get('content')));
@@ -169,7 +171,7 @@ example.views.LogView = Backbone.View.extend({
 		this.options = options;
 		this.$el.append($.el.h3(this.model.get('name')));
 		this.$el.append($.el.h4(this.model.get('tagline')));
-		this.entries = new window.schema.api.LogEntries({'slug':this.model.get('slug')});
+		this.entries = new window.schema.api.LogEntries({'id':this.model.get('id')});
 		this.entriesView = new skella.views.AbstractCollectionView({
 			'collection':this.entries,
 			'itemView':example.views.EntryItemView
@@ -188,7 +190,7 @@ example.views.LogItemView = Backbone.View.extend({
 	initialize: function(options){
 		this.options = options;
 		this.$el.append($.el.h3($.el.a(
-			{'href':'#' + this.model.get('slug')}, 
+			{'href':'#' + this.model.get('id')}, 
 			this.model.get('name'))
 		));
 		this.$el.append($.el.h4(this.model.get('tagline')));

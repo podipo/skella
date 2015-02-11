@@ -192,6 +192,65 @@ skella.views.AbstractCollectionView = Backbone.View.extend({
 	}
 });
 
+skella.views.generateConfirmationModal = function(title, contentEl, callback){
+	return skella.views.generateModal(title, contentEl, [
+		{
+			'text':'Cancel',
+			'callback': callback
+		},
+		{
+			'text':'Ok',
+			'callback': callback
+		}
+	]);
+}
+
+/*
+generateModal returns an element configured as a bootstrap modal
+buttons is an array of maps describing buttons like:
+	{
+		'text': <string to be displayed in button>,
+		'callback': <function called like callback(buttonText)>
+	}
+*/
+skella.views.generateModal = function(title, contentEl, buttons){
+	var modal = $.el.div({'class': 'modal fade'});
+	var modalDialog = $.a(modal, $.el.div({'class':'modal-dialog'}));
+	var modalContent = $.a(modalDialog, $.el.div({'class':'modal-content'}));	
+	var modalHeader = $.a(modalContent, $.el.div({'class':'modal-header'}));
+	
+	var closeButton = $.a(modalHeader, $.el.button({
+		'type':'button',
+		'class':'close',
+		'data-dismiss':'modal',
+		'aria-label':'Close'
+	}));
+	var closeSpan = $.a(closeButton, $.el.span({'aria-hidden':'true'}));
+	$(closeSpan).html('&times');
+
+	if(title){
+		modalHeader.appendChild($.el.h4({'class':'modal-title'}, title));
+	}
+
+	var modalBody = $.a(modalContent, $.el.div({'class':'modal-body'}, contentEl));
+
+	var modalFooter = $.a(modalContent, $.el.div({'class':'modal-footer'}));
+
+	for(var i=0; i < buttons.length; i++){
+		var button = $.a(modalFooter, $.el.button({
+			'type':'button',
+			'class':'btn btn-default'
+		}, buttons[i].text));
+		$(button).click(function(){
+			if(this.callback){
+				this.callback(this.text);
+			}
+		}.bind(buttons[i]));
+	}
+
+	return modal;
+}
+
 skella.views.LoginView = Backbone.View.extend({
 	className: 'login-view form-horizontal',
 	tagName: 'form',
@@ -256,8 +315,12 @@ skella.views.ModelSavingView = Backbone.View.extend({
 	initialize: function(options){
 		_.bindAll(this, 'startSpinning', 'stopSpinning');
 		this.options = options;
-		this.spinner = $.a(this.$el, $.el.i({'class':'glyphicon glyphicon-save'}));
+		this.spinner = $.a(this.$el, $.el.i({'class':'glyphicon glyphicon-ok'}));
 		$(this.spinner).hide();
+
+		this.error = $.a(this.$el, $.el.i({'class':'error-icon glyphicon glyphicon-ban-circle'}));
+		$(this.error).hide();
+
 		this.options.model.on('request', this.startSpinning);
 		this.options.model.on('sync', this.stopSpinning);
 		this.options.model.on('error', this.stopSpinning);
@@ -265,8 +328,14 @@ skella.views.ModelSavingView = Backbone.View.extend({
 	startSpinning: function(){
 		$(this.spinner).show();
 	},
-	stopSpinning: function(){
+	stopSpinning: function(success){
+		if(success){
+			$(this.spinner).hide(1000);
+			return;
+		}
 		$(this.spinner).hide();
+		$(this.error).show();
+		$(this.error).hide(2000);
 	}
 })
 
@@ -386,6 +455,21 @@ skella.views.bindTextInput = function(fieldName, model, input){
 	});
 }
 
+/*
+bindModelDisplay displays in an element, el, the value of a model's field, even as it changes
+emptyText is shown if the field is empty
+*/
+skella.views.bindModelDisplay = function(fieldName, model, el, emptyText){
+	var $el = $(el);
+	$el.text(model.get(fieldName) || emptyText);
+	model.on('change:' + fieldName, function(model, newValue){
+		$el.text(newValue || emptyText);
+	});
+}
+
+/*
+generateCheckbox creates a bootstrap style form-group for a checkbox element
+*/
 skella.views.generateCheckbox = function(name, id, label){
 	var formGroup = $.el.div({'class':'form-group checkbox-form-group'});
 	var checkboxDiv = $.el.div({'class':'checkbox'});
