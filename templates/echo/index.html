@@ -2,9 +2,12 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Example | {{site.name}}</title>
+		<title>Echo | {{site.name}}</title>
 		{{> site-styles}}
 		<style>
+			.echo-view p {
+				margin-top: 10px;
+			}
 		</style>
 	</head>
 	<body>
@@ -13,12 +16,7 @@
 			<div id="page-wrapper">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-xs-12 col-sm-offset-3 col-sm-6">
-							<h1>Example:</h1>
-						</div>
-					</div>
-					<div class="row">
-						<div id="echo-col" class="col-xs-12 col-sm-offset-3 col-sm-6">
+						<div id="echo-col" class="col-xs-12">
 						</div>
 					</div>
 				</div>
@@ -27,12 +25,16 @@
 			{{> site-scripts}}
 			<script>
 				$(document).ready(function(){
-					$('.example-nav').addClass('active');
+					$('.echo-nav').addClass('active');
+					if(!window.schema){
+						$('#echo-col').append(new skella.views.NoSchemaView().el);
+						return;
+					}
 					window.schema.on(skella.events.SchemaPopulated, init);
 				});
 				function init(){
 					if(!window.schema.user || window.schema.user.isNew()){
-						document.location.href = '/login/?next=/example/';
+						document.location.href = '/login/?next=/echo/';
 						return;
 					}
 					window.echoView = new example.views.EchoView({});

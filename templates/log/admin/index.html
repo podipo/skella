@@ -24,11 +24,15 @@
 			<script>
 				$(document).ready(function(){
 					$('.log-nav').addClass('active');
-					window.schema.on(skella.events.SchemaPopulated, init);
+					if(!window.schema){
+						$('#view-col').append(new skella.views.NoSchemaView().el);
+					} else {
+						window.schema.on(skella.events.SchemaPopulated, init);
+					}
 				});
 
 				function showError(message){
-					$('view-col').append(message);
+					$('#view-col').append(message);
 				}
 
 				function init(){

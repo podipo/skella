@@ -192,6 +192,19 @@ skella.views.AbstractCollectionView = Backbone.View.extend({
 	}
 });
 
+skella.views.NoSchemaView = Backbone.View.extend({
+	className: 'no-schema-view',
+	initialize: function(options){
+		this.options = options;
+		this.$el.append($.el.h3('No Backend Found'));
+		this.$el.append($.el.p('The API server was not detected.'));
+		this.$el.append($.el.p('Is the ', $.el.a({'href':'https://github.com/podipo/skellago/'}, 'Skella back end'), ' running?'));
+	}
+});
+
+/*
+generateConfirmationModel uses generateModal with the default buttons of a confirmation modal
+*/
 skella.views.generateConfirmationModal = function(title, contentEl, callback){
 	return skella.views.generateModal(title, contentEl, [
 		{
