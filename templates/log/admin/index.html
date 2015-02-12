@@ -23,7 +23,7 @@
 			<script src="/admin.js"></script>
 			<script>
 				$(document).ready(function(){
-					$('.example-nav').addClass('active');
+					$('.log-nav').addClass('active');
 					window.schema.on(skella.events.SchemaPopulated, init);
 				});
 
@@ -33,7 +33,7 @@
 
 				function init(){
 					if(!window.schema.user || window.schema.user.isNew()){
-						document.location.href = '/login/?next=/example/log/admin/';
+						document.location.href = '/login/?next=/log/admin/';
 						return;
 					}
 
@@ -52,10 +52,12 @@
 						showError('There are no logs to administer.');
 						return;
 					}
-
-					// TODO figure out how to display multiple logs and choose one to edit
+					if(!document.location.hash){
+						showError('There is no log specified in the document location hash');
+						return;
+					}
 					var logEntries = new window.schema.api.LogEntries({
-						'slug': window.logs.at(0).get('slug')
+						'id': document.location.hash.substring(1)
 					});
 					logEntries.fetch({
 						'success': handleEntriesFetched,

@@ -5,6 +5,9 @@
 		<title>Logs | {{site.name}}</title>
 		{{> site-styles}}
 		<style>
+			.edit-link {
+				float: right;
+			}
 		</style>
 	</head>
 	<body>
@@ -22,7 +25,7 @@
 			{{> site-scripts}}
 			<script>
 				$(document).ready(function(){
-					$('.example-nav').addClass('active');
+					$('.log-nav').addClass('active');
 					window.schema.on(skella.events.SchemaPopulated, init);
 				});
 
@@ -34,13 +37,13 @@
 				}
 
 				function handleFetcherComplete(){
-					window.router = new example.views.LogRouter({
+					window.router = new skella.views.LogRouter({
 						'logs':window.logs,
 						'el':$('#view-col')
 					});
 
 					Backbone.history.start({
-						root: "/example/log/"
+						root: '/log/'
 					});
 				}
 			</script>

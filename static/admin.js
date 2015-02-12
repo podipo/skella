@@ -199,7 +199,7 @@ skella.views.AdminFocusItemView = Backbone.View.extend({
 			if(typeof this.options.model == 'undefined') throw 'This view requires a model option';
 			if(typeof this.options.itemTitle == 'undefined') throw 'This view requires an itemTitle option';
 
-			this.schema = this.model.__proto__.schema;
+			this.schema = this.model.schema;
 			for(var i=0; i < this.schema.properties.length; i++){
 				var prop = this.schema.properties[i];
 				if(prop.protected){
