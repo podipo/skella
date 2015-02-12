@@ -5,19 +5,25 @@ skella.events = skella.events || {};
 
 skella.events.FetcherComplete = 'fetcher-complete';
 
-$(document).ready(function(){
-	if(window.schema){
-		window.schema.on(skella.events.SchemaPopulated, skella.views.schemaPopulated);
-	}
-})
-
 // Date and time formats used with moment.js
 skella.DateFormat = 'MMM D, YYYY';
 skella.MonthFormat = 'MMM, YYYY';
 skella.TimestampFormat = 'MM/D/YY HH:mm';
 
 
+$(document).ready(function(){
+	// If and when the Skella back end has set up the schema, call schemaPopulated
+	if(window.schema){
+		window.schema.on(skella.events.SchemaPopulated, skella.views.schemaPopulated);
+	}
+})
+
+/*
+schemaPopulated is called after the Skella back end wrapper has been set up
+*/
 skella.views.schemaPopulated = function(){
+
+	// Extend the User Backbone.Model with a handy name function
 	window.schema.api.User.prototype.displayName = function(){
 		if(this.get('first-name')){
 			var result = this.get('first-name');
@@ -30,19 +36,20 @@ skella.views.schemaPopulated = function(){
 	}
 
 	skella.views.updateAccountNav();
-	if(window.schema && window.schema.user){
-		// React to changes to the user
-		window.schema.on(skella.events.LoggedIn, skella.views.updateAccountNav);
-		window.schema.on(skella.events.LoggedOut, skella.views.updateAccountNav);
+	window.schema.on(skella.events.LoggedIn, skella.views.updateAccountNav);
+	window.schema.on(skella.events.LoggedOut, skella.views.updateAccountNav);
+
+	// React to changes to the authenticated user
+	if(window.schema.user){
 		window.schema.user.on('change:first-name', skella.views.updateAccountNav);
 		window.schema.user.on('change:last-name', skella.views.updateAccountNav);
 		window.schema.user.on('change:email', skella.views.updateAccountNav);
 	}
-	if(window.schema){
-		window.schema.on(skella.events.LoggedIn, skella.views.updateAccountNav);
-	}
 }
 
+/*
+updateAccountNav modifies the lefthand menu of the top nav based on whether the user is logged in
+*/
 skella.views.updateAccountNav = function(){
 	var value = "";
 	var topNav = $('#top-nav-collapse');
@@ -65,14 +72,13 @@ skella.views.updateAccountNav = function(){
 }
 
 /*
-	A helper function which appends child to parent and returns child.
-	Enables code like: `var button = $.a(this.el, $.el.button());`
+A helper function which appends child to parent and returns child.
+Enables code like: `var button = $.a(this.el, $.el.button());`
 */
 $.a = function(parent, child){
 	$(parent).append(child);
 	return child;
 }
-
 
 skella.urlParams = {}; // This will be populated with the parameters in the document.location;
 
@@ -192,6 +198,9 @@ skella.views.AbstractCollectionView = Backbone.View.extend({
 	}
 });
 
+/*
+A little view used on pages that require the Skella back end but when the schema isn't available
+*/
 skella.views.NoSchemaView = Backbone.View.extend({
 	className: 'no-schema-view',
 	initialize: function(options){
@@ -203,7 +212,7 @@ skella.views.NoSchemaView = Backbone.View.extend({
 });
 
 /*
-generateConfirmationModel uses generateModal with the default buttons of a confirmation modal
+generateConfirmationModel uses generateModal with the default Ok and Cancel buttons of a confirmation modal
 */
 skella.views.generateConfirmationModal = function(title, contentEl, callback){
 	return skella.views.generateModal(title, contentEl, [
@@ -264,64 +273,9 @@ skella.views.generateModal = function(title, contentEl, buttons){
 	return modal;
 }
 
-skella.views.LoginView = Backbone.View.extend({
-	className: 'login-view form-horizontal',
-	tagName: 'form',
-	initialize: function(options){
-		_.bindAll(this, 'handleSubmit', 'handleLoginSuccess', 'handleLoginFailure', 'hideError', 'showError');
-		this.options = options;
-		this.$el.attr({
-			'role':'form',
-		});
-		this.emailFormGroup = $.a(this.el, skella.views.generateInputFormGroup(
-			'text', 
-			'email', 'email', 
-			'Email', 'email'
-		));
-
-		this.passwordFormGroup = $.a(this.el, skella.views.generateInputFormGroup(
-			'password',
-			'password', 'password', 
-			'Password', 'password'
-		));
-
-		this.submitButton = $.el.button({
-			'type':'submit',
-			'class':'btn btn-primary'
-		}, this.options.submitText || 'Submit');
-		this.submitGroup = $.a(this.el, $.el.div({'class':'form-group submit-form-group'}, $.el.div({'class':'submit-wrapper'}, this.submitButton)));
-
-		this.$el.submit(this.handleSubmit);
-	},
-	hideError: function(){
-		this.$el.find('.error').remove();
-	},
-	showError: function(message){
-		this.hideError();
-		this.$el.prepend($.el.p({'class':'error'}, message));
-	},
-	handleSubmit: function(event){
-		event.preventDefault();
-		var email = $(this.emailFormGroup).find('input').val();
-		var password = $(this.passwordFormGroup).find('input').val();
-		if(email == "" || password == "") {
-			this.showError('Please enter an email and password.');
-			return;
-		}
-		skella.api.login(email, password, this.handleLoginSuccess, this.handleLoginFailure); 
-	},
-	handleLoginSuccess: function(){
-		if(skella.urlParams.next) {
-			document.location.href = skella.urlParams.next;
-		} else {
-			document.location.href = "/";
-		}
-	},
-	handleLoginFailure: function(){
-		this.showError('Email or password do not match.');
-	}
-});
-
+/*
+ModelSavingView provides visual feedback as a model is saved, including when there is an error
+*/
 skella.views.ModelSavingView = Backbone.View.extend({
 	className:'model-saving-view',
 	tagName: 'span',
@@ -341,7 +295,7 @@ skella.views.ModelSavingView = Backbone.View.extend({
 	startSpinning: function(){
 		$(this.spinner).show();
 	},
-	stopSpinning: function(success){
+	stopSpinning: function(success){ // if success is false, show a red error animation
 		if(success){
 			$(this.spinner).hide(1000);
 			return;
@@ -351,84 +305,6 @@ skella.views.ModelSavingView = Backbone.View.extend({
 		$(this.error).hide(2000);
 	}
 })
-
-skella.views.UserImageEditorView = Backbone.View.extend({
-	className:'user-image-editor-view',
-	initialize: function(options){
-		this.options = options;
-		_.bindAll(this, 'handleInputChanged', 'handleImageUploaded', 'handleUploadError', 'handleImageLoaded', 'handleImageError');
-		this.imageView = $.a(this.el, $.el.div({'class':'user-image'}));
-
-		this.userImage = new Image();
-		this.imageView.appendChild(this.userImage);
-		this.userImage.onload = this.handleImageLoaded;
-		this.userImage.onerror = this.handleImageError;
-		this.userImage.src = '/api/' + window.API_VERSION + '/user/current/image';
-
-		this.form = $.a(this.$el, $.el.form());
-		this.fileInput = $.a(this.form, $.el.input({'type':'file', 'name':'image'}));
-		$(this.fileInput).change(this.handleInputChanged);
-	},
-	handleInputChanged: function(){
-		var formData = new FormData();
-		formData.append('image', this.fileInput.files[0]);
-		$.ajax({
-			url: '/api/' + window.API_VERSION + '/user/current/image',
-			data: formData,
-			headers :  {
-				'Accept': skella.schema.acceptFormat + window.API_VERSION
-			},
-			cache: false,
-			contentType: false,
-			processData: false,
-			type: 'PUT',
-			success: this.handleImageUploaded,
-			error: this.handleUploadError
-		});
-	},
-	handleImageUploaded: function(){
-		this.userImage.src = '/api/0.1.0/user/current/image?t=' + new Date().getTime();
-	},
-	handleUploadError: function(){
-		console.log("Image upload error");
-	},
-	handleImageError: function(){
-		$(this.userImage).hide();
-	},
-	handleImageLoaded: function(){
-		$(this.userImage).show();
-	}
-});
-
-skella.views.UserEditorView = Backbone.View.extend({
-	className:'user-editor-view',
-	initialize: function(options){
-		this.options = options;
-		if (!this.options.model) throw 'UserEditorView requires a model option';
-		this.form = $.el.form({'class':'form-horizontal', 'role':'form'});
-		this.$el.append(this.form);
-
-		this.emailGroup = $.a(this.form, skella.views.generateInputFormGroup(
-			"static", "email", "email", "email", "email"
-		));
-		skella.views.bindTextInput("email", this.options.model, $(this.emailGroup).find('.form-control-static'));
-
-		this.firstNameGroup = $.a(this.form, skella.views.generateInputFormGroup(
-			"text", "first-name", "first-name", "first name", "first name"
-		));
-		skella.views.bindTextInput("first-name", this.options.model, $(this.firstNameGroup).find('input'));
-
-		this.lastNameGroup = $.a(this.form, skella.views.generateInputFormGroup(
-			"text", "last-name", "last-name", "last name", "last name"
-		));
-		skella.views.bindTextInput("last-name", this.options.model, $(this.lastNameGroup).find('input'));
-
-		this.modelSavingView = new skella.views.ModelSavingView({'model':this.options.model});
-		this.form.appendChild(this.modelSavingView.el);
-
-		skella.views.autosave(this.options.model, 1000, null, null, null);
-	}
-});
 
 /*
 autosave watches the model for changes and then calls save after `wait` milliseconds.
@@ -526,46 +402,4 @@ skella.views.generateInputFormGroup = function(inputType, name, id, label, place
 	return formGroup;
 }
 
-skella.views.APIDocView = Backbone.View.extend({
-	className: 'api-doc-view',
-	initialize: function(options){
-		this.options = options;
-		if(!this.options.schema) throw 'This view requires an options.schema';
-		var endpoints = this.options.schema.get('endpoints');
-		for(var i=0; i < endpoints.length; i++){
-			this.$el.append(new skella.views.EndpointView({
-				'endpoint':endpoints[i]
-			}).el);
-		}
-	}
-});
-
-skella.views.EndpointView = Backbone.View.extend({
-	className: 'endpoint-view',
-	initialize: function(options){
-		this.options = options;
-		if(!this.options.endpoint) throw 'EndpointView requires an options.endpoint';
-		this.$el.append($.el.h2(this.options.endpoint.title));
-		this.$el.append($.el.h3(this.options.endpoint.path));
-		this.$el.append($.el.div({'class':'description'}, this.options.endpoint.description));
-
-		var propertyTable = $.a(this.el, $.el.table({'class':'property-table'}));
-		propertyTable.appendChild($.el.tr(
-			$.el.th('name'),
-			$.el.th('type'),
-			$.el.th('optional'),
-			$.el.th('child type'),
-			$.el.th('description')
-		));
-		for(var i=0; i < this.options.endpoint.properties.length; i++){
-			var property = this.options.endpoint.properties[i];
-			var propertyRow = $.a(propertyTable, $.el.tr());
-			propertyRow.appendChild($.el.td(property['name']));
-			propertyRow.appendChild($.el.td(property['data-type']));
-			propertyRow.appendChild($.el.td(property['optional'] === true ? 'true':'false'));
-			propertyRow.appendChild($.el.td(property['children-type']));
-			propertyRow.appendChild($.el.td(property['description']));
-		}
-	}
-})
 

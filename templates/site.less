@@ -1,6 +1,9 @@
 @import "bootstrap.less";
 @import "variables.less";
+@import "accounts.less";
 @import "admin.less";
+@import "api/api.less";
+@import "echo/echo.less";
 @import "lsl/living-style-library.less";
 
 @footer-height: 80px;
@@ -71,7 +74,6 @@ body{
 .bg-gray { background-color: @gray }
 .bg-gray-light { background-color: @gray-light }
 .bg-gray-lighter { background-color: @gray-lighter }
-
 
 // Clear shadow stuff
 input.form-control,
@@ -201,65 +203,9 @@ label {
 	}
 }
 
-.page-login-view {
-	.error {
-		padding: 15px;
-		text-align: center;
-		color: @brand-warning;
-	}
-	.input-form-group {
-		label {
-			.make-sm-column(2);
-		}
-		.input-wrapper {
-			.make-sm-column(10);
-		}
-	}
-	.checkbox-form-group {
-		.checkbox-wrapper {
-			.make-sm-column-offset(2);
-			.make-sm-column(10);
-		}
-	}
-	.submit-form-group {
-		.submit-wrapper {
-			.make-sm-column-offset(2);
-			.make-sm-column(10);
-		}
-	}
-}
-
 .model-saving-view {
 	.error-icon {
 		color: @brand-warning;
-	}
-}
-
-.user-editor-view {
-	.model-saving-view {
-		float: right;
-	}
-}
-
-.user-image-editor-view {
-	.user-image {
-		width: 200px;
-		height: 200px;
-		margin-bottom: 15px;
-		img {
-			max-width: 100%;
-			max-height: 100%;
-		}
-	}
-}
-
-.api-doc-view {
-	.endpoint-view {
-		margin-bottom: 40px;
-		h2 { margin: 0; }
-		h3 { margin: 5px 0; }
-		.description { margin-bottom: 5px; }
-		th, td { padding-right: 10px; }
 	}
 }
 
