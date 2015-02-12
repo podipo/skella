@@ -59,7 +59,6 @@ skella.views.LogRouter = Backbone.Router.extend({
 	logs: function() {
 		if(!this.logsView){
 			this.logsView = new skella.views.AbstractCollectionView({
-				'title': 'Logs',
 				'collection': window.logs,
 				'itemView': skella.views.LogItemView
 			});
