@@ -83,7 +83,7 @@ module.exports = function (grunt) {
 			},
 			'test-server': {
 				'options': {
-					'port': 9000,
+					'port': 8500,
 				}
 			}
 		},
@@ -135,7 +135,7 @@ module.exports = function (grunt) {
 			'all': {
 				'options': {
 					'urls': [
-						'http://localhost:9000/tests/'
+						'http://localhost:8500/tests/'
 					]
 				}
 			}
