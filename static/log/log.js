@@ -21,7 +21,6 @@ $(document).ready(function(){
 			}
 			return skella.schema.generateURL(this.schema.path, this.attributes);
 		}
-
 	});
 });
 

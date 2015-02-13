@@ -198,6 +198,46 @@ skella.views.AbstractCollectionView = Backbone.View.extend({
 	}
 });
 
+skella.views.ImageEditorView = Backbone.View.extend({
+	className:'image-editor-view',
+	initialize: function(options){
+		_.bindAll(this, 'handleInputChanged', 'handleImageUploaded', 'handleUploadError', 'handleImageLoaded', 'handleImageError');
+		this.options = options;
+
+		if(!this.options.model) throw 'This view requires a model option';
+		if(!this.options.model.sendForm) throw 'This view requires a model with the sendForm function';
+
+		this.imageView = $.a(this.el, $.el.div({'class':'image-div'}));
+
+		this.image = new Image();
+		this.imageView.appendChild(this.image);
+		this.image.onload = this.handleImageLoaded;
+		this.image.onerror = this.handleImageError;
+		this.image.src = this.options.model.url();
+
+		this.form = $.a(this.$el, $.el.form());
+		this.fileInput = $.a(this.form, $.el.input({'type':'file', 'name':'image'}));
+		$(this.fileInput).change(this.handleInputChanged);
+	},
+	handleInputChanged: function(){
+		var formData = new FormData();
+		formData.append('image', this.fileInput.files[0]);
+		this.model.sendForm('PUT', formData, this.handleImageUploaded, this.handleUploadError);
+	},
+	handleImageUploaded: function(){
+		this.image.src = this.model.url() + '?t=' + new Date().getTime();
+	},
+	handleUploadError: function(){
+		console.log("Image upload error");
+	},
+	handleImageError: function(){
+		$(this.image).hide();
+	},
+	handleImageLoaded: function(){
+		$(this.image).show();
+	}
+});
+
 /*
 A little view used on pages that require the Skella back end but when the schema isn't available
 */

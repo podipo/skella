@@ -238,8 +238,8 @@ skella.views.editViewForProperty = function(property){
 	switch(property['data-type']){
 		case 'int':
 			return skella.views.AdminIntEditView;
-		case 'file':
-			return skella.views.AdminFileEditView;
+		case 'image':
+			return skella.views.AdminImageEditView;
 		case 'timestamp':
 			return skella.views.AdminTimestampEditView;
 		case 'long-string':
@@ -264,6 +264,9 @@ skella.views.AdminProtectedView = Backbone.View.extend({
 	}
 });
 
+/*
+AdminIntEditView is view used by CollectionAdminView for properties of int type
+*/
 skella.views.AdminIntEditView = Backbone.View.extend({
 	className: 'admin-int-edit-view admin-edit-view',
 	initialize: function(options){
@@ -274,6 +277,9 @@ skella.views.AdminIntEditView = Backbone.View.extend({
 	}
 });
 
+/*
+AdminTimestampEditView is view used by CollectionAdminView for properties of timestamp type
+*/
 skella.views.AdminTimestampEditView = Backbone.View.extend({
 	className: 'admin-timestamp-edit-view admin-edit-view',
 	initialize: function(options){
@@ -287,6 +293,9 @@ skella.views.AdminTimestampEditView = Backbone.View.extend({
 	}
 });
 
+/*
+AdminStringEditView is view used by CollectionAdminView for properties of string type
+*/
 skella.views.AdminStringEditView = Backbone.View.extend({
 	className: 'admin-string-edit-view admin-edit-view',
 	initialize: function(options){
@@ -298,6 +307,9 @@ skella.views.AdminStringEditView = Backbone.View.extend({
 	}
 });
 
+/*
+AdminLongStringEditView is view used by CollectionAdminView for properties of long-string type
+*/
 skella.views.AdminLongStringEditView = Backbone.View.extend({
 	className: 'admin-long-string-edit-view admin-edit-view',
 	initialize: function(options){
@@ -309,19 +321,35 @@ skella.views.AdminLongStringEditView = Backbone.View.extend({
 	}	
 })
 
-skella.views.AdminFileEditView = Backbone.View.extend({
+/*
+AdminImageEditView is view used by CollectionAdminView for properties of image type
+*/
+skella.views.AdminImageEditView = Backbone.View.extend({
 	className: 'admin-file-edit-view admin-edit-view',
 	initialize: function(options){
 		this.options = options;
 		if(this.model.get(this.options.name)){
 			this.$el.append($.el.div('current value: ' + this.model.get(this.options.name)));
 		}
-		var fileInput = $.el.input({
-			'type':'file'
-		});
-		this.$el.append(fileInput);
+		var model = this.model;
+
+		// If this property has a file type in the schema, use its API resource
+		var fileType = this.model.fileTypeForProperty(this.options.name);
+		if(fileType){
+			var fileResource = window.schema.findAPIByName(fileType);
+			if(fileResource){
+				model = new fileResource({'id':this.model.get('id')});
+				this.model.on('change:id', function(origModel, newVal){
+					console.log("Changed", arguments);
+					model.set('id', newVal);
+				});
+			}
+		}
+
+		var fileView = new skella.views.ImageEditorView({ 'model': model });
+		this.$el.append(fileView.el);
 	}	
-})
+});
 
 /*
 AdminItemView is the default item view used by the CollectionAdminView
