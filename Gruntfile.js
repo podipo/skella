@@ -43,7 +43,7 @@ module.exports = function (grunt) {
 					'templates/**/*', 
 					'static/**/*'
 				],
-				'tasks': ['less', 'mustache_render', 'copy']
+				'tasks': ['less', 'mustache_render', 'react', 'copy']
 			},
 			'less': {
 				'files': [
@@ -101,6 +101,15 @@ module.exports = function (grunt) {
 				}]
 			}
 		},
+		'react': {
+			'main': {
+				'files': {
+					'dist/compiled-jsx.js': [
+						'templates/example-react.jsx'
+					]
+				}
+			}
+		},
 		'copy': {
 			'main': {
 				'files': [
@@ -126,6 +135,8 @@ module.exports = function (grunt) {
 						'dist/lib/laconic/laconic.js', 
 						'dist/lib/bootstrap/bootstrap.js', 
 						'dist/lib/backbone/backbone.js', 
+						'dist/lib/react/react.js',
+						'dist/compiled-jsx.js',
 						'dist/site.js'
 					]
 				}
@@ -152,8 +163,9 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-bower-task');
 	grunt.loadNpmTasks('grunt-nodestatic');
 	grunt.loadNpmTasks('grunt-mustache-render');
+	grunt.loadNpmTasks('grunt-react');
 
-	grunt.registerTask('default', ['bower:install', 'less', 'mustache_render', 'copy']);
+	grunt.registerTask('default', ['bower:install', 'less', 'mustache_render', 'react', 'copy']);
 	grunt.registerTask('dev', ['browserSync:dev', 'watch:all']);
 	grunt.registerTask('dev-less', ['browserSync:dev', 'watch:less']);
 	grunt.registerTask('test', ['nodestatic:test-server', 'qunit:all']);
